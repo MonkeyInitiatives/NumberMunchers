@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Number Munchers</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    
+
+    <style>
+        .col{background-color: yellow;
+            width: 150px;
+            height: 100px;
+            margin: 10px;
+            padding: 10px;
+            font-size: 24px;
+            text-align: center;}
+    </style>
+
+</head>
+<body>
+    <div class="container">
+
+        <div class="row">
+            <div class="col" id="square1">
+            </div>
+            <div class="col" id="square2">
+            </div>
+            <div class="col" id="square3">
+            </div>
+            <div class="col" id="square4">
+            </div>
+            <div class="col" id="square5">
+            </div>
+            <div class="col" id="square6">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" id="square7">
+            </div>
+            <div class="col" id="square8">
+            </div>
+            <div class="col" id="square9">
+            </div>
+            <div class="col" id="square10">
+            </div>
+            <div class="col" id="square11">
+            </div>
+            <div class="col" id="square12">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" id="square13">
+            </div>
+            <div class="col" id="square14">
+            </div>
+            <div class="col" id="square15">
+            </div>
+            <div class="col" id="square16">
+            </div>
+            <div class="col" id="square17">
+            </div>
+            <div class="col" id="square18">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" id="square19">
+            </div>
+            <div class="col" id="square20">
+            </div>
+            <div class="col" id="square21">
+            </div>
+            <div class="col" id="square22">
+            </div>
+            <div class="col" id="square23">
+            </div>
+            <div class="col" id="square24">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" id="square25">
+            </div>
+            <div class="col" id="square26">
+            </div>
+            <div class="col" id="square27">
+            </div>
+            <div class="col" id="square28">
+            </div>
+            <div class="col" id="square29">
+            </div>
+            <div class="col" id="square30">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <button type="button" class="btn btn-dark" id="multiplesButton">Multiples</button>
+            </div>
+            <div class="col-sm">
+                <button type="button" class="btn btn-dark" id="factorsButton">Factors</button>
+            </div>
+            <div class="col-sm">
+                <button type="button" class="btn btn-dark" id="primeButton">Prime</button>
+            </div>
+            <div class="col-sm">
+                <button type="button" class="btn btn-dark" id="equalityButton">Equality</button>
+            </div>
+            <div class="col-sm">
+                <button type="button" class="btn btn-dark" id="inequalityButton">Inequality</button>
+            </div>
+            <div class="col-sm">
+                <button type="button" class="btn btn-dark" id="statesButton">States</button>
+            </div>
+            <div class="col-sm">
+                <button type="button" class="btn btn-dark" id="citiesButton">Cities</button>
+            </div>
+            <div class="col-sm">
+                <button type="button" class="btn btn-dark" id="capitalsButton">Capitals</button>
+            </div>
+        </div>
+        <div>
+            <h3 id="question">
+            </h3>
+            <h3 id="round">
+            </h3>
+            <h3 id="score">
+            </h3>
+            <h3 id="remaining">
+            </h3>
+        </div>
+    </div>
+    
+
+
+    <!-- fix equality and inequality. -->
+    
+
+
+
+    <script>
+        //initialize global variables
+        {
+        var topBounds = [1,2,3,4,5,6];
+        var leftBounds = [1,7,13,19,25];
+        var bottomBounds = [25,26,27,28,29,30];
+        var rightBounds = [6,12,18,24,30];
+        var border = [1,2,3,4,5,6,7,13,25,26,27,28,29,30,12,18,24];
+        var startingLocation = [8,9,10,11,14,15,16,17,20,21,22,23];
+        var primeNumbers = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199];
+        var statesArray = ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'];
+        var majorCities = ["Aberdeen", "Abilene", "Akron", "Albany", "Albuquerque", "Alexandria", "Allentown", "Amarillo", "Anaheim", "Anchorage", "Ann Arbor", "Antioch", "Apple Valley", "Appleton", "Arlington", "Arvada", "Asheville", "Athens", "Atlanta", "Atlantic City", "Augusta", "Aurora", "Austin", "Bakersfield", "Baltimore", "Barnstable", "Baton Rouge", "Beaumont", "Bel Air", "Bellevue", "Berkeley", "Bethlehem", "Billings", "Birmingham", "Bloomington", "Boise", "Boise City", "Bonita Springs", "Boston", "Boulder", "Bradenton", "Bremerton", "Bridgeport", "Brighton", "Brownsville", "Bryan", "Buffalo", "Burbank", "Burlington", "Cambridge", "Canton", "Cape Coral", "Carrollton", "Cary", "Cathedral City", "Cedar Rapids", "Champaign", "Chandler", "Charleston", "Charlotte", "Chattanooga", "Chesapeake", "Chicago", "Chula Vista", "Cincinnati", "Clarke County", "Clarksville", "Clearwater", "Cleveland", "College Station", "Colorado Springs", "Columbia", "Columbus", "Concord", "Coral Springs", "Corona", "Corpus Christi", "Costa Mesa", "Dallas", "Daly City", "Danbury", "Davenport", "Davidson County", "Dayton", "Daytona Beach", "Deltona", "Denton", "Denver", "Des Moines", "Detroit", "Downey", "Duluth", "Durham", "El Monte", "El Paso", "Elizabeth", "Elk Grove", "Elkhart", "Erie", "Escondido", "Eugene", "Evansville", "Fairfield", "Fargo", "Fayetteville", "Fitchburg", "Flint", "Fontana", "Fort Collins", "Fort Lauderdale", "Fort Smith", "Fort Walton Beach", "Fort Wayne", "Fort Worth", "Frederick", "Fremont", "Fresno", "Fullerton", "Gainesville", "Garden Grove", "Garland", "Gastonia", "Gilbert", "Glendale", "Grand Prairie", "Grand Rapids", "Grayslake", "Green Bay", "GreenBay", "Greensboro", "Greenville", "Gulfport-Biloxi", "Hagerstown", "Hampton", "Harlingen", "Harrisburg", "Hartford", "Havre de Grace", "Hayward", "Hemet", "Henderson", "Hesperia", "Hialeah", "Hickory", "High Point", "Hollywood", "Honolulu", "Houma", "Houston", "Howell", "Huntington", "Huntington Beach", "Huntsville", "Independence", "Indianapolis", "Inglewood", "Irvine", "Irving", "Jackson", "Jacksonville", "Jefferson", "Jersey City", "Johnson City", "Joliet", "Kailua", "Kalamazoo", "Kaneohe", "Kansas City", "Kennewick", "Kenosha", "Killeen", "Kissimmee", "Knoxville", "Lacey", "Lafayette", "Lake Charles", "Lakeland", "Lakewood", "Lancaster", "Lansing", "Laredo", "Las Cruces", "Las Vegas", "Layton", "Leominster", "Lewisville", "Lexington", "Lincoln", "Little Rock", "Long Beach", "Lorain", "Los Angeles", "Louisville", "Lowell", "Lubbock", "Macon", "Madison", "Manchester", "Marina", "Marysville", "McAllen", "McHenry", "Medford", "Melbourne", "Memphis", "Merced", "Mesa", "Mesquite", "Miami", "Milwaukee", "Minneapolis", "Miramar", "Mission Viejo", "Mobile", "Modesto", "Monroe", "Monterey", "Montgomery", "Moreno Valley", "Murfreesboro", "Murrieta", "Muskegon", "Myrtle Beach", "Naperville", "Naples", "Nashua", "Nashville", "New Bedford", "New Haven", "New London", "New Orleans", "New York", "New York City", "Newark", "Newburgh", "Newport News", "Norfolk", "Normal", "Norman", "North Charleston", "North Las Vegas", "North Port", "Norwalk", "Norwich", "Oakland", "Ocala", "Oceanside", "Odessa", "Ogden", "Oklahoma City", "Olathe", "Olympia", "Omaha", "Ontario", "Orange", "Orem", "Orlando", "Overland Park", "Oxnard", "Palm Bay", "Palm Springs", "Palmdale", "Panama City", "Pasadena", "Paterson", "Pembroke Pines", "Pensacola", "Peoria", "Philadelphia", "Phoenix", "Pittsburgh", "Plano", "Pomona", "Pompano Beach", "Port Arthur", "Port Orange", "Port Saint Lucie", "Port St. Lucie", "Portland", "Portsmouth", "Poughkeepsie", "Providence", "Provo", "Pueblo", "Punta Gorda", "Racine", "Raleigh", "Rancho Cucamonga", "Reading", "Redding", "Reno", "Richland", "Richmond", "Richmond County", "Riverside", "Roanoke", "Rochester", "Rockford", "Roseville", "Round Lake Beach", "Sacramento", "Saginaw", "Saint Louis", "Saint Paul", "Saint Petersburg", "Salem", "Salinas", "Salt Lake City", "San Antonio", "San Bernardino", "San Buenaventura", "San Diego", "San Francisco", "San Jose", "Santa Ana", "Santa Barbara", "Santa Clara", "Santa Clarita", "Santa Cruz", "Santa Maria", "Santa Rosa", "Sarasota", "Savannah", "Scottsdale", "Scranton", "Seaside", "Seattle", "Sebastian", "Shreveport", "Simi Valley", "Sioux City", "Sioux Falls", "South Bend", "South Lyon", "Spartanburg", "Spokane", "Springdale", "Springfield", "St. Louis", "St. Paul", "St. Petersburg", "Stamford", "Sterling Heights", "Stockton", "Sunnyvale", "Syracuse", "Tacoma", "Tallahassee", "Tampa", "Temecula", "Tempe", "Thornton", "Thousand Oaks", "Toledo", "Topeka", "Torrance", "Trenton", "Tucson", "Tulsa", "Tuscaloosa", "Tyler", "Utica", "Vallejo", "Vancouver", "Vero Beach", "Victorville", "Virginia Beach", "Visalia", "Waco", "Warren", "Washington", "Waterbury", "Waterloo", "West Covina", "West Valley City", "Westminster", "Wichita", "Wilmington", "Winston", "Winter Haven", "Worcester", "Yakima", "Yonkers", "York", "Youngstown"];
+        var stateCapitals = ["Montgomery", "Juneau", "Phoenix", "Little Rock", "Sacramento", "Denver", "Hartford", "Dover", "Tallahassee", "Atlanta", "Honolulu", "Boise", "Springfield", "Indianapolis", "Des Moines", "Topeka", "Frankfort", "Baton Rouge", "Augusta", "Annapolis", "Boston", "Lansing", "Saint Paul", "Jackson", "Jefferson City", "Helena", "Lincoln", "Carson City", "Concord", "Trenton", "Santa Fe", "Albany", "Raleigh", "Bismarck", "Columbus", "Oklahoma City", "Salem", "Harrisburg", "Providence", "Columbia", "Pierre", "Nashville", "Austin", "Salt Lake City", "Montpelier", "Richmond", "Olympia", "Charleston", "Madison", "Cheyenne"];
+        var multiplesArray = [];
+        var factors = [];
+        var expressionsArray = [];
+        var expressionValue = 0;
+
+        var gameStatus = true;
+
+        var score = 5;
+        var round = 0;
+
+        var gameOverride = false;
+
+        var gameSpeed = 5000;
+
+        var startingSquare = "square"+startingLocation[Math.floor(Math.random()*startingLocation.length)];
+        var correctRemaining = 0;
+        var gameMode = 0;
+        var specialSquareTimer;
+        var newGameTimer;
+        $("#score").text("Score is "+score);
+        }
+        
+        function removeCapitals(){
+            for(var i = 0; i<stateCapitals.length; i++){
+                majorCities.splice( majorCities.indexOf(stateCapitals[i]), 1 );
+            }
+        }
+        
+        removeCapitals();
+        
+        function getFactors(integer){
+            var factors = [],
+            quotient = 0;
+
+            for(var i = 1; i <= integer; i++){
+                quotient = integer/i;
+
+                if(quotient === Math.floor(quotient)){
+                factors.push(i); 
+                }
+            }
+            return factors;
+            }
+
+        function getMultiples(integer){
+            var tempArray  = [];
+            for(var i =1; i<100; i++)
+            {
+                if(i%integer===0){
+                    tempArray.push(i);
+                }
+            }
+            return tempArray;
+        }
+
+        function getMode(arr) {
+            var numMapping = {};
+            var greatestFreq = 0;
+            var mode;
+            arr.forEach(function findMode(number) {
+                numMapping[number] = (numMapping[number] || 0) + 1;
+
+                if (greatestFreq < numMapping[number]) {
+                    greatestFreq = numMapping[number];
+                    mode = number;
+                }
+            });
+            return +mode;
+        }
+
+        function buildGameBoard(){
+            for(var i = 1; i<31; i++){
+                var randomNumber = Math.floor(Math.random() * 3) + 1;
+                var value;
+                if(randomNumber === 1){
+                    value = statesArray[Math.floor(Math.random()*statesArray.length)];
+                }
+                else if(randomNumber ===2){
+                    value = majorCities[Math.floor(Math.random()*majorCities.length)];
+                }
+                else{
+                    value = stateCapitals[Math.floor(Math.random()*stateCapitals.length)];
+                }
+                $("#square"+i).data('value', value);
+                $("#square"+i).text(value);
+                $("#square"+i).css("background-color", "yellow");
+                $("#square"+i).removeClass("character");
+                $("#square"+i).removeClass("specialSquare");
+                $("#square"+i).css("border-style", "solid");
+                $("#square"+i).css("border-color", "transparent");
+                $("#square"+i).css("border-width", "15px");
+                getCorrectRemaining();
+            }
+        }
+
+        function buildNumberBoard(){
+            for(var i = 1; i<31; i++){
+                var value = Math.floor(Math.random() * 30) + 1;
+                if(gameMode===2){
+                    value = Math.floor(Math.random() * 10) + 1;
+                }
+                $("#square"+i).data('value', value);
+                $("#square"+i).text(value);
+                $("#square"+i).css("background-color", "yellow");
+                $("#square"+i).removeClass("character");
+                $("#square"+i).removeClass("specialSquare");
+                $("#square"+i).css("border-style", "solid");
+                $("#square"+i).css("border-color", "transparent");
+                $("#square"+i).css("border-width", "15px");
+                getCorrectRemaining();
+            }
+        }
+
+        function sortNumber(a,b) {
+            return a - b;
+        }
+
+        function buildExpressionsBoard(){
+            expressionsArray = [];
+            var tempArray = [];
+            while(tempArray.length<7){
+                var value = Math.floor(Math.random() * 30) + 1;
+                if(!tempArray.includes(value)){
+                    tempArray.push(value);
+                }
+            }
+            console.log(tempArray.sort(sortNumber));
+            var value1;
+            var value2;
+            var operatorNumber;
+            var operator;
+
+            for(var i = 1; i<31; i++){
+                var theValue = 0;
+                var expressionChecker = true;
+
+                if(tempArray.includes(i)){
+                    while(expressionChecker){
+                        value1 = Math.floor(Math.random() * 10) + 1;
+                        value2 = Math.floor(Math.random() * 10) + 1;
+                        operatorNumber = Math.floor(Math.random() * 4) + 1;
+                        if(operatorNumber===1){
+                            operator = "+";
+                        }
+                        else if(operatorNumber===2){
+                            operator = "-";
+                        }   
+                        else if(operatorNumber===3){
+                            operator = "*";
+                        }
+                        else{
+                            operator = "/";
+                        }
+                        theValue = eval(value1+operator+value2);
+                        if(gameMode===4){
+                            if (theValue === parseInt(theValue, 10)&&theValue<10&&theValue===expressionValue){
+                                expressionChecker = false;
+                            }
+                            else{
+                                expressionChecker = true;
+                            }
+                        }
+                        else if(gameMode===5){
+                            if (theValue === parseInt(theValue, 10)&&theValue<10&&theValue!==expressionValue){
+                                expressionChecker = false;
+                            }
+                            else{
+                                expressionChecker = true;
+                            }
+                        }
+                    }
+                }
+                else{
+                    while(expressionChecker){
+                        value1 = Math.floor(Math.random() * 10) + 1;
+                        value2 = Math.floor(Math.random() * 10) + 1;
+                        operatorNumber = Math.floor(Math.random() * 4) + 1;
+                        if(operatorNumber===1){
+                            operator = "+";
+                        }
+                        else if(operatorNumber===2){
+                            operator = "-";
+                        }   
+                        else if(operatorNumber===3){
+                            operator = "*";
+                        }
+                        else{
+                            operator = "/";
+                        }
+                        theValue = eval(value1+operator+value2);
+                        if(gameMode===4){
+                            if (theValue === parseInt(theValue, 10)&&theValue<10&&theValue!==expressionValue){
+                                expressionChecker = false;
+                            }
+                            else{
+                                expressionChecker = true;
+                            }
+                        }
+                        else if(gameMode===5){
+                            if (theValue === parseInt(theValue, 10)&&theValue<10&&theValue===expressionValue){
+                                expressionChecker = false;
+                            }
+                            else{
+                                expressionChecker = true;
+                            }
+                        }
+                    }
+                }
+
+                $("#square"+i).data('value', theValue);
+                $("#square"+i).text(value1+operator+value2);
+                $("#square"+i).css("background-color", "yellow");
+                $("#square"+i).removeClass("character");
+                $("#square"+i).removeClass("specialSquare");
+                $("#square"+i).css("border-style", "solid");
+                $("#square"+i).css("border-color", "transparent");
+                $("#square"+i).css("border-width", "15px");
+                expressionsArray.push($("#square"+i).data('value'));
+            }
+            getCorrectRemaining();
+        }
+
+        function newGame()
+        {
+            gameStatus = true;
+            round++;
+            correctRemaining = 0;
+            var quizRandomNumber = 0;
+            expressionsArray = [];
+            expressionValue = 0;
+            multiplesArray = [];
+            factors = [];
+            $("#round").text("Round "+round);
+            clearTimeout(specialSquareTimer);
+            clearTimeout(newGameTimer);
+
+            if(!gameOverride){
+                gameMode = Math.floor(Math.random() * 8) + 1;
+            }
+            // gameMode=7;
+            if(gameMode===1){
+                quizRandomNumber = Math.floor(Math.random() * 6) + 2;
+                $("#question").text("Multiples of "+quizRandomNumber);
+                multiplesArray = getMultiples(quizRandomNumber);
+                buildNumberBoard();
+            }
+            else if(gameMode===2){
+                quizRandomNumber = Math.floor(Math.random() * 30) + 15;
+                $("#question").text("Factors of "+quizRandomNumber);
+                factors = getFactors(quizRandomNumber);
+                buildNumberBoard();
+            }
+            else if(gameMode===3){
+                quizRandomNumber = Math.floor(Math.random() * 6) + 2;
+                buildNumberBoard();
+                $("#question").text("Prime numbers");
+            }
+            else if(gameMode===4){
+                //equality
+                quizRandomNumber = Math.floor(Math.random() * 10) + 1;
+                expressionValue = quizRandomNumber;
+                buildExpressionsBoard();
+                getCorrectRemaining();
+                $("#question").text("Expressions equal to " + quizRandomNumber);
+            }
+            else if(gameMode===5){
+                //inequality
+                quizRandomNumber = Math.floor(Math.random() * 10) + 1;
+                expressionValue = quizRandomNumber;
+                buildExpressionsBoard();
+                getCorrectRemaining();
+                $("#question").text("Expressions NOT equal to " + quizRandomNumber);
+            }
+            else if(gameMode===6){
+                //states
+                $("#question").text("States");
+                buildGameBoard();
+            }
+            else if(gameMode===7){
+                //major cities
+                $("#question").text("Cities that are NOT capitals");
+                buildGameBoard();
+            }
+            else if(gameMode===8){
+                //capitals
+                $("#question").text("Capitals");
+                buildGameBoard();
+            }
+
+            startingSquare = "square"+startingLocation[Math.floor(Math.random()*startingLocation.length)];
+            $("#"+startingSquare).css("background-color", "lightblue");
+            $("#"+startingSquare).addClass("character");
+
+            if(correctRemaining<=0){
+                newGame();
+            }
+            specialSquareTimer = setInterval(function() {
+                setSpecialSquare();
+                getCorrectRemaining();
+                
+            },gameSpeed);
+        }
+
+        function getCorrectRemaining(){
+            // console.log("Get remaining count");
+            correctRemaining = 0;
+            for(var i = 1; i<31; i++){
+                var value = $("#square"+i).data('value');
+                if(gameMode===1){
+                    if(multiplesArray.includes(value)){
+                        correctRemaining++;
+                    }
+                }
+                else if(gameMode===2){
+                    if(factors.includes(value)){
+                        correctRemaining++;
+                    }
+                }
+                else if(gameMode===3){
+                    if(primeNumbers.includes(value)){
+                        correctRemaining++;
+                    }
+                }
+                else if(gameMode===4){
+                    if(value===expressionValue&&value!==""){
+                        correctRemaining++;
+                    }
+                }
+                else if(gameMode===5){
+                    if(value!==expressionValue&&value!==""){
+                        correctRemaining++;
+                    }
+                }
+                else if(gameMode===6){
+                    if(statesArray.includes(value)){
+                        correctRemaining++;
+                    }
+                }
+                else if(gameMode===7){
+                    if(majorCities.includes(value)){
+                        correctRemaining++;
+                    }
+                }
+                else if(gameMode===8){
+                    if(stateCapitals.includes(value)){
+                        correctRemaining++;
+                    }
+                }
+                else{
+
+                }
+            }
+            $("#remaining").text("Remaining "+correctRemaining);
+            $("#score").text("Score is "+score);
+
+        }
+
+        function setSpecialSquare(){
+            // console.log("set special square");
+            var keepGettingNewSquare = true;
+            // console.log(randomSquare);
+            while(keepGettingNewSquare){
+                var randomSquare = Math.floor(Math.random() * 30) + 1;
+                if($("#square"+randomSquare).data("value")!==""){
+                    if(gameMode<4){
+                        var value = Math.floor(Math.random() * 30) + 1;
+                        $("#square"+randomSquare).data('value', value);
+                        $("#square"+randomSquare).text(value);
+                        $("#square"+randomSquare).fadeOut(500).fadeIn(500);
+                    }
+                    else if(gameMode<6){
+                        var value1 = Math.floor(Math.random() * 10) + 1;
+                        var value2 = Math.floor(Math.random() * 10) + 1;
+                        var operatorNumber = Math.floor(Math.random() * 4) + 1;
+                        var operator;
+                        if(operatorNumber===1){
+                            operator = "+";
+                        }
+                        else if(operatorNumber===2){
+                            operator = "-";
+                        }   
+                        else if(operatorNumber===3){
+                            operator = "*";
+                        }
+                        else{
+                            operator = "/";
+                        }
+                        $("#square"+randomSquare).data('value', eval(value1+operator+value2));
+                        $("#square"+randomSquare).text(value1+operator+value2);
+                        $("#square"+randomSquare).fadeOut(500).fadeIn(500);
+                        expressionsArray.push($("#square"+randomSquare).data('value'));
+                    }
+                    else{
+                        var randomNumber = Math.floor(Math.random() * 3) + 1;
+                        var value;
+                        if(randomNumber === 1){
+                            value = statesArray[Math.floor(Math.random()*statesArray.length)];
+                        }
+                        else if(randomNumber === 2){
+                            value = majorCities[Math.floor(Math.random()*majorCities.length)];
+                        }
+                        else{
+                            value = stateCapitals[Math.floor(Math.random()*stateCapitals.length)];
+                        }
+                        $("#square"+randomSquare).data('value', value);
+                        $("#square"+randomSquare).text(value);
+                        $("#square"+randomSquare).fadeOut(500).fadeIn(500);
+                    }
+                    score-=2;
+                    keepGettingNewSquare=false;
+                }
+                else{
+                    keepGettingNewSquare=true;
+                }
+            }
+        }
+
+        function moveCharacter(currrentSquare, direction){
+            $(".character").css("background-color", "yellow");
+            $("#square"+currrentSquare).removeClass("character");
+            $("#square"+(currrentSquare+direction)).addClass("character");
+            $(".character").css("background-color", "lightblue");
+        }
+
+        function eatNumber(currrentSquare){
+            $(".character").css("background-color", "green");
+            $("#square"+currrentSquare).data('value', "");
+            $("#square"+currrentSquare).text("");
+            $("#square"+currrentSquare).css("border-color", "transparent");
+            score+=1;
+            correctRemaining--;
+            if(correctRemaining===0){
+                gameStatus = false;
+                score+=5;
+                newGameTimer = setTimeout(function() {
+                    newGame();
+                },3000);
+            }
+        }
+
+        function pointChecker(arrayToCheck, currrentSquare){
+            if(arrayToCheck.includes($(".character").data("value"))&&$(".character").data("value")!=="")
+            {
+                eatNumber(currrentSquare);
+            }
+            else if($(".character").data("value")!==""){
+                $(".character").css("background-color", "red");
+                score-=5;
+            }
+            else{}
+            $("#remaining").text("Remaining "+correctRemaining);
+        }
+
+        document.onkeyup = function(event) {
+            console.log(gameStatus);
+            var currrentSquare = $(".character").attr("id").replace('square','');
+            currrentSquare = parseInt(currrentSquare);
+            if(gameStatus){
+                if(event.key ==="ArrowLeft"){
+                    if(!leftBounds.includes(currrentSquare)){
+                        moveCharacter(currrentSquare, -1);
+                    }
+                }
+                else if(event.key==="ArrowUp"){
+                    if(!topBounds.includes(currrentSquare)){
+                        moveCharacter(currrentSquare, -6);
+                    }
+                }
+                else if(event.key==="ArrowRight"){
+                    if(!rightBounds.includes(currrentSquare)){
+                        moveCharacter(currrentSquare, 1);
+                    }
+                }
+                else if(event.key==="ArrowDown"){
+                    if(!bottomBounds.includes(currrentSquare)){
+                        moveCharacter(currrentSquare, 6);
+                    }
+                }
+                else if(event.key===" "){
+                    if(gameMode===1){
+                        pointChecker(multiplesArray, currrentSquare);
+                    }
+                    else if(gameMode===2){
+                        pointChecker(factors, currrentSquare);
+                    }
+                    else if(gameMode===3){
+                        pointChecker(primeNumbers, currrentSquare);
+                    }
+                    else if(gameMode===4){
+                        console.log("this is a tset");
+                        if($("#square"+currrentSquare).data('value')===expressionValue&&$("#square"+currrentSquare).data('value')!==""){
+                            eatNumber(currrentSquare);
+                        }
+                        else if($("#square"+currrentSquare).data('value')!==expressionValue&&$("#square"+currrentSquare).data('value')!==""){
+                            $(".character").css("background-color", "red");
+                            score-=5;
+                        }
+                        $("#remaining").text("Remaining "+correctRemaining);
+                    }
+                    else if(gameMode===5){
+                        if($("#square"+currrentSquare).data('value')!==expressionValue){
+                            eatNumber(currrentSquare);
+                        }
+                        else if($("#square"+currrentSquare).data('value')!==expressionValue&&$("#square"+currrentSquare).data('value')===""){
+                            $(".character").css("background-color", "red");
+                            score-=5;
+                        }
+                        $("#remaining").text("Remaining "+correctRemaining);
+                    }
+                    else if(gameMode===6){
+                        pointChecker(statesArray, currrentSquare);
+                    }
+                    else if(gameMode===7){
+                        pointChecker(majorCities, currrentSquare);
+                    }
+                    else if(gameMode===8){
+                        pointChecker(stateCapitals, currrentSquare);
+                    }
+                    else{
+
+                    }
+                    $("#score").text("Score is "+score);
+                }
+                else{
+
+                }
+            }
+        };
+
+        newGame();
+   
+        $(".btn").click(function() {
+            gameOverride = true;
+        });
+
+        $("#multiplesButton").click(function() {
+            gameMode = 1;
+            newGame();
+        });
+        $("#factorsButton").click(function() {
+            gameMode = 2;
+            newGame();
+        });
+        $("#primeButton").click(function() {
+            gameMode = 3;
+            newGame();
+        });
+        $("#equalityButton").click(function() {
+            gameMode = 4;
+            newGame();
+        });
+        $("#inequalityButton").click(function() {
+            gameMode = 5;
+            newGame();
+        });
+        $("#statesButton").click(function() {
+            gameMode = 6;
+            newGame();
+        });
+        $("#citiesButton").click(function() {
+            gameMode = 7;
+            newGame();
+        });
+        $("#capitalsButton").click(function() {
+            gameMode = 8;
+            newGame();
+        });
+
+    </script>
+</body>
+</html>
