@@ -14,13 +14,29 @@
     
 
     <style>
-        .col{background-color: yellow;
-            width: 60px;
-            height: 60px;
-            margin: 10px;
-            padding: 10px;
-            font-size: 12px;
-            text-align: center;}
+        .col{
+            position: relative;
+            overflow: hidden;
+            background-color: yellow;
+            max-width: 200px;
+            font-size: 14px;
+            text-align: center;
+        }
+        .padding-0{
+            padding-right:0;
+            padding-left:0;
+        }
+        .row{
+            height: 200px;
+        }
+        img{
+            position: relative;
+            height: 125px;
+            text-align: center;
+            margin: auto;
+            display: block;
+            overflow: hidden;
+        }
     </style>
 
 </head>
@@ -159,6 +175,9 @@
         var factors = [];
         var expressionsArray = [];
         var expressionValue = 0;
+        var characterIsAnimating = false;
+        var movementAnimationSpeed = 1000;
+        var digAnimationSpeed = 1600;
 
         var gameStatus = true;
 
@@ -167,7 +186,7 @@
 
         var gameOverride = false;
 
-        var gameSpeed = 5000;
+        var gameSpeed = 15000;
 
         var startingSquare = "square"+startingLocation[Math.floor(Math.random()*startingLocation.length)];
         var correctRemaining = 0;
@@ -244,7 +263,7 @@
                 $("#square"+i).removeClass("character");
                 $("#square"+i).removeClass("specialSquare");
                 $("#square"+i).css("border-style", "solid");
-                $("#square"+i).css("border-color", "transparent");
+                $("#square"+i).css("border-color", "red");
                 $("#square"+i).css("border-width", "15px");
                 getCorrectRemaining();
             }
@@ -262,7 +281,7 @@
                 $("#square"+i).removeClass("character");
                 $("#square"+i).removeClass("specialSquare");
                 $("#square"+i).css("border-style", "solid");
-                $("#square"+i).css("border-color", "transparent");
+                $("#square"+i).css("border-color", "red");
                 $("#square"+i).css("border-width", "15px");
                 getCorrectRemaining();
             }
@@ -370,7 +389,7 @@
                 $("#square"+i).removeClass("character");
                 $("#square"+i).removeClass("specialSquare");
                 $("#square"+i).css("border-style", "solid");
-                $("#square"+i).css("border-color", "transparent");
+                $("#square"+i).css("border-color", "red");
                 $("#square"+i).css("border-width", "15px");
                 expressionsArray.push($("#square"+i).data('value'));
             }
@@ -447,7 +466,9 @@
             startingSquare = "square"+startingLocation[Math.floor(Math.random()*startingLocation.length)];
             $("#"+startingSquare).css("background-color", "lightblue");
             $("#"+startingSquare).addClass("character");
+            $(".character").prepend('<img id="guybrush" src="./assets/images/standing.png" />')
 
+            $(".col").addClass("padding-0");
             if(correctRemaining<=0){
                 newGame();
             }
@@ -518,7 +539,7 @@
             // console.log(randomSquare);
             while(keepGettingNewSquare){
                 var randomSquare = Math.floor(Math.random() * 30) + 1;
-                if($("#square"+randomSquare).data("value")!==""){
+                if($("#square"+randomSquare).data("value")!==""&&!$("#square"+randomSquare).hasClass("character")){
                     if(gameMode<4){
                         var value = Math.floor(Math.random() * 30) + 1;
                         $("#square"+randomSquare).data('value', value);
@@ -573,17 +594,130 @@
         }
 
         function moveCharacter(currrentSquare, direction){
-            $(".character").css("background-color", "yellow");
-            $("#square"+currrentSquare).removeClass("character");
-            $("#square"+(currrentSquare+direction)).addClass("character");
-            $(".character").css("background-color", "lightblue");
+            console.log("Div height = "+$(".character").height());
+            var divHeight = $(".character").height();
+            console.log("Div width = "+$(".character").width());
+            var divWidth = $(".character").width();
+            console.log("Image height = "+$("#guybrush").height());
+            var imageHeight = $("#guybrush").height();
+            console.log("Image width = "+$("#guybrush").width());
+            var imageWidth = $("#guybrush").width();
+        
+            var center = divWidth - ((divWidth/2) - (imageWidth/2));
+
+            var animationDirection = 0;
+            var animationSource = "";
+            var animationAxis = "";
+            if(direction===1){
+                characterIsAnimating = true;
+                animationDirection = -(center);
+                animationAxis = "margin-right";
+                animationSource = "./assets/images/animations/walk-right.gif";
+                $("#guybrush").attr("src", animationSource);
+                $(".character").css("background-color", "yellow");
+                $('#guybrush').animate({"margin-right": animationDirection}, movementAnimationSpeed, function(){
+                    $(".character img:last-child").remove();
+                    $("#square"+currrentSquare).removeClass("character");
+                    $("#square"+(currrentSquare+direction)).addClass("character");
+                    $(".character").prepend('<img id="guybrush" src="./assets/images/standing.png" />')
+                    $("#guybrush").attr("src", animationSource);
+                    $("#guybrush").css("left", animationDirection);
+                    $('#guybrush').animate({"margin-right": animationDirection}, movementAnimationSpeed, function(){
+                        $(".character").css("background-color", "lightblue");
+                        $("#guybrush").css("left", "0px");
+                        $("#guybrush").css("margin", "auto");
+                        $("#guybrush").attr("src","./assets/images/standing.png");
+                        characterIsAnimating = false;
+                    });
+                });
+            }
+            else if(direction===-6){
+                characterIsAnimating = true;
+                animationDirection = -125;
+                animationAxis = "margin-top";
+                animationSource = "./assets/images/animations/walk-up.gif";
+                $("#guybrush").attr("src", animationSource);
+                $(".character").css("background-color", "yellow");
+                $('#guybrush').animate({"margin-top": animationDirection}, movementAnimationSpeed, function(){
+                    $(".character img:last-child").remove();
+                    $("#square"+currrentSquare).removeClass("character");
+                    $("#square"+(currrentSquare+direction)).addClass("character");
+                    $(".character").prepend('<img id="guybrush" src="./assets/images/standing.png" />')
+                    $("#guybrush").attr("src", animationSource);
+                    $("#guybrush").css("bottom", animationDirection);
+                    $('#guybrush').animate({"margin-top": animationDirection}, movementAnimationSpeed, function(){
+                        $(".character").css("background-color", "lightblue");
+                        $("#guybrush").css("bottom", "0px");
+                        $("#guybrush").css("margin", "auto");
+                        $("#guybrush").attr("src","./assets/images/standing.png");
+                        characterIsAnimating = false;
+                    });
+                });
+            }
+            else if(direction===-1){
+                characterIsAnimating = true;
+                animationDirection = center;
+                animationAxis = "margin-right";
+                animationSource = "./assets/images/animations/walk-left.gif";
+                $("#guybrush").attr("src", animationSource);
+                $(".character").css("background-color", "yellow");
+                $('#guybrush').animate({"margin-right": animationDirection}, movementAnimationSpeed, function(){
+                    $(".character img:last-child").remove();
+                    $("#square"+currrentSquare).removeClass("character");
+                    $("#square"+(currrentSquare+direction)).addClass("character");
+                    $(".character").prepend('<img id="guybrush" src="./assets/images/standing.png" />')
+                    $("#guybrush").attr("src", animationSource);
+                    $("#guybrush").css("left", animationDirection);
+                    $('#guybrush').animate({"margin-right": animationDirection}, movementAnimationSpeed, function(){
+                        $(".character").css("background-color", "lightblue");
+                        $("#guybrush").css("left", "0px");
+                        $("#guybrush").css("margin", "auto");
+                        $("#guybrush").attr("src","./assets/images/standing.png");
+                        characterIsAnimating = false;
+                    });
+                });
+            }
+            else if(direction===6){
+                characterIsAnimating = true;
+                animationDirection = 125;
+                animationAxis = "margin-top";
+                animationSource = "./assets/images/animations/walk-down.gif";
+                $("#guybrush").attr("src", animationSource);
+                $(".character").css("background-color", "yellow");
+                $('#guybrush').animate({"margin-top": animationDirection}, movementAnimationSpeed, function(){
+                    $(".character img:last-child").remove();
+                    $("#square"+currrentSquare).removeClass("character");
+                    $("#square"+(currrentSquare+direction)).addClass("character");
+                    $(".character").prepend('<img id="guybrush" src="./assets/images/standing.png" />')
+                    $("#guybrush").attr("src", animationSource);
+                    $("#guybrush").css("bottom", animationDirection);
+                    $('#guybrush').animate({"margin-top": animationDirection}, movementAnimationSpeed, function(){
+                        $(".character").css("background-color", "lightblue");
+                        $("#guybrush").css("bottom", "0px");
+                        $("#guybrush").css("margin", "auto");
+                        $("#guybrush").attr("src","./assets/images/standing.png");
+                        characterIsAnimating = false;
+                    });
+                });
+            }
+            else{
+                $(".character").css("background-color", "yellow");
+                $(".character img:last-child").remove();
+                $("#square"+currrentSquare).removeClass("character");
+                $("#square"+(currrentSquare+direction)).addClass("character");
+                $(".character").css("background-color", "lightblue");
+                $(".character").prepend('<img id="guybrush" src="./assets/images/standing.png" />')
+            }
+            
         }
 
         function eatNumber(currrentSquare){
             $(".character").css("background-color", "green");
             $("#square"+currrentSquare).data('value', "");
             $("#square"+currrentSquare).text("");
-            $("#square"+currrentSquare).css("border-color", "transparent");
+            $(".character").prepend('<img id="guybrush" src="./assets/images/standing.png" />')
+
+            $("#square"+currrentSquare).css("border-color", "red");
             score+=1;
             correctRemaining--;
             if(correctRemaining===0){
@@ -613,70 +747,81 @@
             var currrentSquare = $(".character").attr("id").replace('square','');
             currrentSquare = parseInt(currrentSquare);
             if(gameStatus){
-                if(event.key ==="ArrowLeft"){
+                if(event.key ==="ArrowLeft" && characterIsAnimating===false){
                     if(!leftBounds.includes(currrentSquare)){
                         moveCharacter(currrentSquare, -1);
                     }
                 }
-                else if(event.key==="ArrowUp"){
+                else if(event.key==="ArrowUp" && characterIsAnimating===false){
                     if(!topBounds.includes(currrentSquare)){
                         moveCharacter(currrentSquare, -6);
                     }
                 }
-                else if(event.key==="ArrowRight"){
+                else if(event.key==="ArrowRight" && characterIsAnimating===false){
                     if(!rightBounds.includes(currrentSquare)){
                         moveCharacter(currrentSquare, 1);
                     }
                 }
-                else if(event.key==="ArrowDown"){
+                else if(event.key==="ArrowDown" && characterIsAnimating===false){
                     if(!bottomBounds.includes(currrentSquare)){
                         moveCharacter(currrentSquare, 6);
                     }
                 }
-                else if(event.key===" "){
-                    if(gameMode===1){
-                        pointChecker(multiplesArray, currrentSquare);
-                    }
-                    else if(gameMode===2){
-                        pointChecker(factors, currrentSquare);
-                    }
-                    else if(gameMode===3){
-                        pointChecker(primeNumbers, currrentSquare);
-                    }
-                    else if(gameMode===4){
-                        console.log("this is a tset");
-                        if($("#square"+currrentSquare).data('value')===expressionValue&&$("#square"+currrentSquare).data('value')!==""){
-                            eatNumber(currrentSquare);
+                else if(event.key===" " && characterIsAnimating===false){
+                    characterIsAnimating = true;
+                    animationDirection = 0;
+                    animationAxis = "margin-right";
+                    animationSource = "./assets/images/animations/dig.gif";
+                    $("#guybrush").attr("src", animationSource);
+                    $(".character").css("background-color", "yellow");
+                    $('#guybrush').animate({"right": animationDirection}, digAnimationSpeed, function(){
+                        $(".character img:last-child").remove();
+                        $(".character").prepend('<img id="guybrush" src="./assets/images/standing.png" />')
+                        characterIsAnimating = false;
+                        if(gameMode===1){
+                            pointChecker(multiplesArray, currrentSquare);
                         }
-                        else if($("#square"+currrentSquare).data('value')!==expressionValue&&$("#square"+currrentSquare).data('value')!==""){
-                            $(".character").css("background-color", "red");
-                            score-=5;
+                        else if(gameMode===2){
+                            pointChecker(factors, currrentSquare);
                         }
-                        $("#remaining").text("Remaining "+correctRemaining);
-                    }
-                    else if(gameMode===5){
-                        if($("#square"+currrentSquare).data('value')!==expressionValue){
-                            eatNumber(currrentSquare);
+                        else if(gameMode===3){
+                            pointChecker(primeNumbers, currrentSquare);
                         }
-                        else if($("#square"+currrentSquare).data('value')!==expressionValue&&$("#square"+currrentSquare).data('value')===""){
-                            $(".character").css("background-color", "red");
-                            score-=5;
+                        else if(gameMode===4){
+                            console.log("this is a tset");
+                            if($("#square"+currrentSquare).data('value')===expressionValue&&$("#square"+currrentSquare).data('value')!==""){
+                                eatNumber(currrentSquare);
+                            }
+                            else if($("#square"+currrentSquare).data('value')!==expressionValue&&$("#square"+currrentSquare).data('value')!==""){
+                                $(".character").css("background-color", "red");
+                                score-=5;
+                            }
+                            $("#remaining").text("Remaining "+correctRemaining);
                         }
-                        $("#remaining").text("Remaining "+correctRemaining);
-                    }
-                    else if(gameMode===6){
-                        pointChecker(statesArray, currrentSquare);
-                    }
-                    else if(gameMode===7){
-                        pointChecker(majorCities, currrentSquare);
-                    }
-                    else if(gameMode===8){
-                        pointChecker(stateCapitals, currrentSquare);
-                    }
-                    else{
+                        else if(gameMode===5){
+                            if($("#square"+currrentSquare).data('value')!==expressionValue){
+                                eatNumber(currrentSquare);
+                            }
+                            else if($("#square"+currrentSquare).data('value')!==expressionValue&&$("#square"+currrentSquare).data('value')===""){
+                                $(".character").css("background-color", "red");
+                                score-=5;
+                            }
+                            $("#remaining").text("Remaining "+correctRemaining);
+                        }
+                        else if(gameMode===6){
+                            pointChecker(statesArray, currrentSquare);
+                        }
+                        else if(gameMode===7){
+                            pointChecker(majorCities, currrentSquare);
+                        }
+                        else if(gameMode===8){
+                            pointChecker(stateCapitals, currrentSquare);
+                        }
+                        else{
 
-                    }
-                    $("#score").text("Score is "+score);
+                        }
+                        $("#score").text("Score is "+score);
+                    });
                 }
                 else{
 
@@ -686,6 +831,8 @@
 
         newGame();
    
+   //Buttons
+   {
         $(".btn").click(function() {
             gameOverride = true;
         });
@@ -722,7 +869,7 @@
             gameMode = 8;
             newGame();
         });
-
+   }
     </script>
 </body>
 </html>
