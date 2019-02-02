@@ -1294,6 +1294,8 @@
 
         //self contained. looks to be working fine. changes border-color to lightgreen, image to guybrush
         //this restarts the game if correctRemaining is zero
+
+        //fix the animation bug!
         function eatNumber(currrentSquare){
             $(".character").css("border-color", "lightgreen");
             $("#square"+currrentSquare).data('value', "");
@@ -1301,15 +1303,18 @@
             $(".character").prepend('<img id="guybrush" src="./assets/images/standing.png" />')
             $("#square"+currrentSquare).css('background-image', 'none');
 
-            // $("#square"+currrentSquare).css("border-color", "yellow");
+            // 
+            
             score+=1;
             correctRemaining--;
             if(correctRemaining===0){
                 gameStatus = false;
                 score+=5;
+                var animationSource = "./assets/images/animations/blowup.gif";
+                $("#guybrush").attr("src", animationSource);
                 newGameTimer = setTimeout(function() {
                     newGame();
-                },3000);
+                },3801);
             }
         }
 
