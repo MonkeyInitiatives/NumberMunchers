@@ -1549,6 +1549,13 @@
    //pathfinding
 
    $(".col").click(function() {
+
+            for(var i = 1; i<31; i++){
+                if($("#square"+i).data("value")===""){
+                    $("#square"+i).css("border-color", "lightgreen");
+                }
+            }
+                    
             var characterSquare = parseInt($(".character").attr("id").replace('square', ''));
             var goalSquare = parseInt($(this).attr("id").replace('square', ''));
             console.log(characterSquare);
@@ -1700,6 +1707,11 @@
                         }
                         $("#score").text("Score is "+score);
                     });
+                }
+            }
+            for(var i = 1; i<31; i++){
+                if($("#square"+i).data("value")===""){
+                    $("#square"+i).css("border-color", "lightgreen");
                 }
             }
     });
