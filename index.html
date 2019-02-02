@@ -1553,39 +1553,26 @@
             var goalSquare = parseInt($(this).attr("id").replace('square', ''));
             console.log(characterSquare);
             console.log(goalSquare);
-            if((characterSquare%6)!=(goalSquare%6)){
-                console.log("move left or right");
-                console.log(Math.ceil(characterSquare/6)===Math.ceil(goalSquare/6));
-                if((Math.ceil(characterSquare/6)!==Math.ceil(goalSquare/6))){
-                    if((characterSquare/6)>(goalSquare/6)){
-                        moveCharacter(characterSquare, 1);
-                    }
-                    else{
+            if(characterSquare!==goalSquare){
+                if((Math.ceil(characterSquare/6)===Math.ceil(goalSquare/6))){
+                    if(characterSquare>goalSquare){
+                        console.log("move left");
                         moveCharacter(characterSquare, -1);
                     }
-                }
-                else{
-                    if(characterSquare-goalSquare<0 && (Math.ceil(characterSquare/6)!==Math.ceil(goalSquare/6))){
+                    else{
+                        console.log("move right");
                         moveCharacter(characterSquare, 1);
                     }
-                    else{
-                        moveCharacter(characterSquare, -1);
-                    }
                 }
-            }
-            else if((characterSquare%6)===(goalSquare%6)&&(characterSquare!==goalSquare)){
-                console.log("move up  or down");
-                if((characterSquare-goalSquare)>0){
+                else if((characterSquare-goalSquare)>0){
+                    console.log("up");
                     moveCharacter(characterSquare, -6);
                 }
-                else{
+                else if((characterSquare-goalSquare)<0){
+                    console.log("down");
                     moveCharacter(characterSquare, 6);
                 }
             }
-            else{
-
-            }
-
     });
 
     </script>
