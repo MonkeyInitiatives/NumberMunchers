@@ -1573,6 +1573,133 @@
                     moveCharacter(characterSquare, 6);
                 }
             }
+            else{
+                characterIsAnimating = true;
+                var currrentSquare = characterSquare
+                animationDirection = 0;
+                animationAxis = "margin-right";
+                animationSource = "./assets/images/animations/dig.gif";
+                $("#guybrush").attr("src", animationSource);
+                $(".character").css("background-color", "transparent");
+                $('#guybrush').animate({"right": animationDirection}, digAnimationSpeed, function(){
+                    $(".character img:last-child").remove();
+                    $(".character").prepend('<img id="guybrush" src="./assets/images/standing.png" />')
+                    characterIsAnimating = false;
+                    if(gameMode===1){
+                        pointChecker(multiplesArray, currrentSquare);
+                    }
+                    else if(gameMode===2){
+                        pointChecker(factors, currrentSquare);
+                    }
+                    else if(gameMode===3){
+                        pointChecker(primeNumbers, currrentSquare);
+                    }
+                    else if(gameMode===4){
+                        console.log("this is a tset");
+                        if($("#square"+currrentSquare).data('value')===expressionValue&&$("#square"+currrentSquare).data('value')!==""){
+                            eatNumber(currrentSquare);
+                        }
+                        else if($("#square"+currrentSquare).data('value')!==expressionValue&&$("#square"+currrentSquare).data('value')!==""){
+                            $(".character").css("border-color", "red");
+                            score-=5;
+                        }
+                        $("#remaining").text("Remaining "+correctRemaining);
+                    }
+                    else if(gameMode===5){
+                        if($("#square"+currrentSquare).data('value')!==expressionValue){
+                            eatNumber(currrentSquare);
+                        }
+                        else if($("#square"+currrentSquare).data('value')!==expressionValue&&$("#square"+currrentSquare).data('value')===""){
+                            $(".character").css("border-color", "red");
+                            score-=5;
+                        }
+                        $("#remaining").text("Remaining "+correctRemaining);
+                    }
+                    else if(gameMode===6){
+                        pointChecker(statesArray, currrentSquare);
+                    }
+                    else if(gameMode===7){
+                        pointChecker(majorCities, currrentSquare);
+                    }
+                    else if(gameMode===8){
+                        pointChecker(stateCapitals, currrentSquare);
+                    }
+                    else if(gameMode===9){
+                        pointChecker(randomStateFlags, currrentSquare);
+                    }
+                    else if(gameMode===10){
+                        var oceanState = pacificOceanStates.concat(atlanticOceanStates);
+                        pointChecker(oceanState, currrentSquare);
+                    }
+                    else if(gameMode===11){
+                        pointChecker(pacificOceanStates, currrentSquare);
+                    }
+                    else if(gameMode===12){
+                        pointChecker(atlanticOceanStates, currrentSquare);
+                    }
+                    else if(gameMode===13){
+                        pointChecker(mexicoBorderStates, currrentSquare);
+                    }
+                    else if(gameMode===14){
+                        pointChecker(canadaBorderStates, currrentSquare);
+                    }
+                    else if(gameMode===15){
+                        pointChecker(unionStates, currrentSquare);
+                    }
+                    else if(gameMode===16){
+                        pointChecker(confederateStates, currrentSquare);
+                    }
+                    else if(gameMode===17){
+                        pointChecker(civilWarBorderStates, currrentSquare);
+                    }
+                    else if(gameMode===18){
+                        pointChecker(originalColonies, currrentSquare);
+                    }
+                    else if(gameMode===19){
+                        pointChecker(europeanCountries, currrentSquare);
+                    }
+                    else if(gameMode===20){
+                        pointChecker(asianCountries, currrentSquare);
+                    }
+                    else if(gameMode===21){
+                        pointChecker(africanCountries, currrentSquare);
+                    }
+                    else if(gameMode===22){
+                        pointChecker(naCountries, currrentSquare);
+                    }
+                    else if(gameMode===23){
+                        pointChecker(saCountries, currrentSquare);
+                    }
+                    else if(gameMode===24){
+                        pointChecker(countriesInEU, currrentSquare);
+                    }
+                    else if(gameMode===25){
+                        pointChecker(nativeEnglishSpeaking, currrentSquare);
+                    }
+                    else if(gameMode===26){
+                        pointChecker(ww1Countries, currrentSquare);
+                    }
+                    else if(gameMode===27){
+                        pointChecker(adjectives, currrentSquare);
+                    }
+                    else if(gameMode===28){
+                        pointChecker(verbs, currrentSquare);
+                    }
+                    else if(gameMode===29){
+                        pointChecker(nouns, currrentSquare);
+                    }
+                    else if(gameMode===30){
+                        pointChecker(adverbs, currrentSquare);
+                    }
+                    else if(gameMode===31){
+                        pointChecker(randomWorldFlags, currrentSquare);
+                    }
+                    else{
+
+                    }
+                    $("#score").text("Score is "+score);
+                });
+            }
     });
 
     </script>
