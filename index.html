@@ -196,7 +196,7 @@
         var primeNumbers = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199];
         var statesArray = ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'];
         var stateFlagsArray = [ 'alabama.png', 'alaska.png', 'arizona.png', 'arkansas.png', 'california.png', 'colorado.png', 'connecticut.png', 'delaware.png', 'florida.png', 'georgia.png', 'hawaii.png', 'idaho.png', 'illinois.png', 'indiana.png', 'iowa.png', 'kansas.png', 'kentucky.png', 'louisiana.png', 'maine.png', 'maryland.png', 'massachusetts.png', 'michigan.png', 'minnesota.png', 'mississippi.png', 'missouri.png', 'montana.png', 'nebraska.png', 'nevada.png', 'new-hampshire.png', 'new-jersey.png', 'new-mexico.png', 'new-york.png', 'north-carolina.png', 'north-dakota.png', 'ohio.png', 'oklahoma.png', 'oregon.png', 'pennsylvania.png', 'rhode-island.png', 'south-carolina.png', 'south-dakota.png', 'tennessee.png', 'texas.png', 'utah.png', 'vermont.png', 'virginia.png', 'washington.png', 'west-virginia.png', 'wisconsin.png', 'wyoming.png' ];
-        var worldFlagsArray = ["Afghanistan.png", "Albania.png", "Algeria.png", "American-Samoa.png", "Andorra.png", "Angola.png", "Anguilla.png", "Antigua-and-Barbuda.png", "Argentina.png", "Armenia.png", "Aruba.png", "Australia.png", "Austria.png", "Azerbaijan.png", "Bahamas.png", "Bahrain.png", "Bangladesh.png", "Barbados.png", "Belarus.png", "Belgium.png", "Belize.png", "Benin.png", "Bermuda.png", "Bhutan.png", "Bolivia.png", "Bosnia.png", "Botswana.png", "Brazil.png", "British-Virgin-Islands.png", "Brunei.png", "Bulgaria.png", "Burkina-Faso.png", "Burundi.png", "Cambodia.png", "Cameroon.png", "Canada.png", "Cape-Verde.png", "Cayman-Islands.png", "Central-African-Republic.png", "Chad.png", "Chile.png", "China.png", "Christmas-Island.png", "Colombia.png", "Comoros.png", "Cook-Islands.png", "Costa-Rica.png", "Côte-d'Ivoire.png", "Croatia.png", "Cuba.png", "Cyprus.png", "Czech-Republic.png", "Democratic-Republic-of-the-Congo.png", "Denmark.png", "Djibouti.png", "Dominica.png", "Dominican-Republic.png", "Ecuador.png", "Egypt.png", "El-Salvador.png", "Equatorial-Guinea.png", "Eritrea.png", "Estonia.png", "Ethiopia.png", "Falkland-Islands.png", "Faroe-Islands.png", "Fiji.png", "Finland.png", "France.png", "French-Polynesia.png", "Gabon.png", "Gambia.png", "Georgia.png", "Germany.png", "Ghana.png", "Gibraltar.png", "Greece.png", "Greenland.png", "Grenada.png", "Guam.png", "Guatemala.png", "Guinea-Bissau.png", "Guinea.png", "Guyana.png", "Haiti.png", "Honduras.png", "Hong-Kong.png", "Hungary.png", "Iceland.png", "India.png", "Indonesia.png", "Iran.png", "Iraq.png", "Ireland.png", "Israel.png", "Italy.png", "Jamaica.png", "Japan.png", "Jordan.png", "Kazakhstan.png", "Kenya.png", "Kiribati.png", "Kuwait.png", "Kyrgyzstan.png", "Laos.png", "Latvia.png", "Lebanon.png", "Lesotho.png", "Liberia.png", "Libya.png", "Liechtenstein.png", "Lithuania.png", "Luxembourg.png", "Macao.png", "Macedonia.png", "Madagascar.png", "Malawi.png", "Malaysia.png", "Maldives.png", "Mali.png", "Malta.png", "Marshall-Islands.png", "Martinique.png", "Mauritania.png", "Mauritius.png", "Mexico.png", "Micronesia.png", "Moldova.png", "Monaco.png", "Mongolia.png", "Montserrat.png", "Morocco.png", "Mozambique.png", "Myanmar.png", "Namibia.png", "Nauru.png", "Nepal.png", "Netherlands-Antilles.png", "Netherlands.png", "New-Zealand.png", "Nicaragua.png", "Niger.png", "Nigeria.png", "Niue.png", "Norfolk-Island.png", "North-Korea.png", "Norway.png", "Oman.png", "Pakistan.png", "Palau.png", "Panama.png", "Papua-New-Guinea.png", "Paraguay.png", "Peru.png", "Philippines.png", "Pitcairn-Islands.png", "Poland.png", "Portugal.png", "Puerto-Rico.png", "Qatar.png", "Republic-of-the-Congo.png", "Romania.png", "Russian-Federation.png", "Rwanda.png", "Saint-Kitts-and-Nevis.png", "Saint-Lucia.png", "Saint-Pierre.png", "Saint-Vicent-and-the-Grenadines.png", "Samoa.png", "San-Marino.png", "Sao-Tomé-and-Príncipe.png", "Saudi-Arabia.png", "Senegal.png", "Serbia-and-Montenegro.png", "Seychelles.png", "Sierra-Leone.png", "Singapore.png", "Slovakia.png", "Slovenia.png", "Soloman-Islands.png", "Somalia.png", "South-Africa.png", "South-Georgia.png", "South-Korea.png", "Soviet-Union.png", "Spain.png", "Sri-Lanka.png", "Sudan.png", "Suriname.png", "Swaziland.png", "Sweden.png", "Switzerland.png", "Syria.png", "Taiwan.png", "Tajikistan.png", "Tanzania.png", "Thailand.png", "Tibet.png", "Timor-Leste.png", "Togo.png", "Tonga.png", "Trinidad-and-Tobago.png", "Tunisia.png", "Turkey.png", "Turkmenistan.png", "Turks-and-Caicos-Islands.png", "Tuvalu.png", "UAE.png", "Uganda.png", "Ukraine.png", "United-Kingdom.png", "United-States-of-America.png", "Uruguay.png", "US-Virgin-Islands.png", "Uzbekistan.png", "Vanuatu.png", "Vatican-City.png", "Venezuela.png", "Vietnam.png", "Wallis-and-Futuna.png", "Yemen.png", "Zambia.png", "Zimbabwe.png"];
+        var worldFlagsArray = ["Afghanistan.png", "Albania.png", "Algeria.png", "American-Samoa.png", "Andorra.png", "Angola.png", "Anguilla.png", "Antigua-and-Barbuda.png", "Argentina.png", "Armenia.png", "Aruba.png", "Australia.png", "Austria.png", "Azerbaijan.png", "Bahamas.png", "Bahrain.png", "Bangladesh.png", "Barbados.png", "Belarus.png", "Belgium.png", "Belize.png", "Benin.png", "Bermuda.png", "Bhutan.png", "Bolivia.png", "Bosnia.png", "Botswana.png", "Brazil.png", "British-Virgin-Islands.png", "Brunei.png", "Bulgaria.png", "Burkina-Faso.png", "Burundi.png", "Cambodia.png", "Cameroon.png", "Canada.png", "Cape-Verde.png", "Cayman-Islands.png", "Central-African-Republic.png", "Chad.png", "Chile.png", "China.png", "Christmas-Island.png", "Colombia.png", "Comoros.png", "Cook-Islands.png", "Costa-Rica.png", "Croatia.png", "Cuba.png", "Cyprus.png", "Czech-Republic.png", "Democratic-Republic-of-the-Congo.png", "Denmark.png", "Djibouti.png", "Dominica.png", "Dominican-Republic.png", "Ecuador.png", "Egypt.png", "El-Salvador.png", "Equatorial-Guinea.png", "Eritrea.png", "Estonia.png", "Ethiopia.png", "Falkland-Islands.png", "Faroe-Islands.png", "Fiji.png", "Finland.png", "France.png", "French-Polynesia.png", "Gabon.png", "Gambia.png", "Georgia.png", "Germany.png", "Ghana.png", "Gibraltar.png", "Greece.png", "Greenland.png", "Grenada.png", "Guam.png", "Guatemala.png", "Guinea-Bissau.png", "Guinea.png", "Guyana.png", "Haiti.png", "Honduras.png", "Hong-Kong.png", "Hungary.png", "Iceland.png", "India.png", "Indonesia.png", "Iran.png", "Iraq.png", "Ireland.png", "Israel.png", "Italy.png", "Jamaica.png", "Japan.png", "Jordan.png", "Kazakhstan.png", "Kenya.png", "Kiribati.png", "Kuwait.png", "Kyrgyzstan.png", "Laos.png", "Latvia.png", "Lebanon.png", "Lesotho.png", "Liberia.png", "Libya.png", "Liechtenstein.png", "Lithuania.png", "Luxembourg.png", "Macao.png", "Macedonia.png", "Madagascar.png", "Malawi.png", "Malaysia.png", "Maldives.png", "Mali.png", "Malta.png", "Marshall-Islands.png", "Martinique.png", "Mauritania.png", "Mauritius.png", "Mexico.png", "Micronesia.png", "Moldova.png", "Monaco.png", "Mongolia.png", "Montserrat.png", "Morocco.png", "Mozambique.png", "Myanmar.png", "Namibia.png", "Nauru.png", "Nepal.png", "Netherlands-Antilles.png", "Netherlands.png", "New-Zealand.png", "Nicaragua.png", "Niger.png", "Nigeria.png", "Niue.png", "Norfolk-Island.png", "North-Korea.png", "Norway.png", "Oman.png", "Pakistan.png", "Palau.png", "Panama.png", "Papua-New-Guinea.png", "Paraguay.png", "Peru.png", "Philippines.png", "Pitcairn-Islands.png", "Poland.png", "Portugal.png", "Puerto-Rico.png", "Qatar.png", "Republic-of-the-Congo.png", "Romania.png", "Russian-Federation.png", "Rwanda.png", "Saint-Kitts-and-Nevis.png", "Saint-Lucia.png", "Saint-Pierre.png", "Saint-Vicent-and-the-Grenadines.png", "Samoa.png", "San-Marino.png", "Sao-Tomé-and-Príncipe.png", "Saudi-Arabia.png", "Senegal.png", "Serbia-and-Montenegro.png", "Seychelles.png", "Sierra-Leone.png", "Singapore.png", "Slovakia.png", "Slovenia.png", "Soloman-Islands.png", "Somalia.png", "South-Africa.png", "South-Georgia.png", "South-Korea.png", "Soviet-Union.png", "Spain.png", "Sri-Lanka.png", "Sudan.png", "Suriname.png", "Swaziland.png", "Sweden.png", "Switzerland.png", "Syria.png", "Taiwan.png", "Tajikistan.png", "Tanzania.png", "Thailand.png", "Tibet.png", "Timor-Leste.png", "Togo.png", "Tonga.png", "Trinidad-and-Tobago.png", "Tunisia.png", "Turkey.png", "Turkmenistan.png", "Turks-and-Caicos-Islands.png", "Tuvalu.png", "UAE.png", "Uganda.png", "Ukraine.png", "United-Kingdom.png", "United-States-of-America.png", "Uruguay.png", "US-Virgin-Islands.png", "Uzbekistan.png", "Vanuatu.png", "Vatican-City.png", "Venezuela.png", "Vietnam.png", "Wallis-and-Futuna.png", "Yemen.png", "Zambia.png", "Zimbabwe.png"];
         var majorCities = ["Aberdeen", "Abilene", "Akron", "Albany", "Albuquerque", "Alexandria", "Allentown", "Amarillo", "Anaheim", "Anchorage", "Ann Arbor", "Antioch", "Apple Valley", "Appleton", "Arlington", "Arvada", "Asheville", "Athens", "Atlanta", "Atlantic City", "Augusta", "Aurora", "Austin", "Bakersfield", "Baltimore", "Barnstable", "Baton Rouge", "Beaumont", "Bel Air", "Bellevue", "Berkeley", "Bethlehem", "Billings", "Birmingham", "Bloomington", "Boise", "Boise City", "Bonita Springs", "Boston", "Boulder", "Bradenton", "Bremerton", "Bridgeport", "Brighton", "Brownsville", "Bryan", "Buffalo", "Burbank", "Burlington", "Cambridge", "Canton", "Cape Coral", "Carrollton", "Cary", "Cathedral City", "Cedar Rapids", "Champaign", "Chandler", "Charleston", "Charlotte", "Chattanooga", "Chesapeake", "Chicago", "Chula Vista", "Cincinnati", "Clarke County", "Clarksville", "Clearwater", "Cleveland", "College Station", "Colorado Springs", "Columbia", "Columbus", "Concord", "Coral Springs", "Corona", "Corpus Christi", "Costa Mesa", "Dallas", "Daly City", "Danbury", "Davenport", "Davidson County", "Dayton", "Daytona Beach", "Deltona", "Denton", "Denver", "Des Moines", "Detroit", "Downey", "Duluth", "Durham", "El Monte", "El Paso", "Elizabeth", "Elk Grove", "Elkhart", "Erie", "Escondido", "Eugene", "Evansville", "Fairfield", "Fargo", "Fayetteville", "Fitchburg", "Flint", "Fontana", "Fort Collins", "Fort Lauderdale", "Fort Smith", "Fort Walton Beach", "Fort Wayne", "Fort Worth", "Frederick", "Fremont", "Fresno", "Fullerton", "Gainesville", "Garden Grove", "Garland", "Gastonia", "Gilbert", "Glendale", "Grand Prairie", "Grand Rapids", "Grayslake", "Green Bay", "GreenBay", "Greensboro", "Greenville", "Gulfport-Biloxi", "Hagerstown", "Hampton", "Harlingen", "Harrisburg", "Hartford", "Havre de Grace", "Hayward", "Hemet", "Henderson", "Hesperia", "Hialeah", "Hickory", "High Point", "Hollywood", "Honolulu", "Houma", "Houston", "Howell", "Huntington", "Huntington Beach", "Huntsville", "Independence", "Indianapolis", "Inglewood", "Irvine", "Irving", "Jackson", "Jacksonville", "Jefferson", "Jersey City", "Johnson City", "Joliet", "Kailua", "Kalamazoo", "Kaneohe", "Kansas City", "Kennewick", "Kenosha", "Killeen", "Kissimmee", "Knoxville", "Lacey", "Lafayette", "Lake Charles", "Lakeland", "Lakewood", "Lancaster", "Lansing", "Laredo", "Las Cruces", "Las Vegas", "Layton", "Leominster", "Lewisville", "Lexington", "Lincoln", "Little Rock", "Long Beach", "Lorain", "Los Angeles", "Louisville", "Lowell", "Lubbock", "Macon", "Madison", "Manchester", "Marina", "Marysville", "McAllen", "McHenry", "Medford", "Melbourne", "Memphis", "Merced", "Mesa", "Mesquite", "Miami", "Milwaukee", "Minneapolis", "Miramar", "Mission Viejo", "Mobile", "Modesto", "Monroe", "Monterey", "Montgomery", "Moreno Valley", "Murfreesboro", "Murrieta", "Muskegon", "Myrtle Beach", "Naperville", "Naples", "Nashua", "Nashville", "New Bedford", "New Haven", "New London", "New Orleans", "New York", "New York City", "Newark", "Newburgh", "Newport News", "Norfolk", "Normal", "Norman", "North Charleston", "North Las Vegas", "North Port", "Norwalk", "Norwich", "Oakland", "Ocala", "Oceanside", "Odessa", "Ogden", "Oklahoma City", "Olathe", "Olympia", "Omaha", "Ontario", "Orange", "Orem", "Orlando", "Overland Park", "Oxnard", "Palm Bay", "Palm Springs", "Palmdale", "Panama City", "Pasadena", "Paterson", "Pembroke Pines", "Pensacola", "Peoria", "Philadelphia", "Phoenix", "Pittsburgh", "Plano", "Pomona", "Pompano Beach", "Port Arthur", "Port Orange", "Port Saint Lucie", "Port St. Lucie", "Portland", "Portsmouth", "Poughkeepsie", "Providence", "Provo", "Pueblo", "Punta Gorda", "Racine", "Raleigh", "Rancho Cucamonga", "Reading", "Redding", "Reno", "Richland", "Richmond", "Richmond County", "Riverside", "Roanoke", "Rochester", "Rockford", "Roseville", "Round Lake Beach", "Sacramento", "Saginaw", "Saint Louis", "Saint Paul", "Saint Petersburg", "Salem", "Salinas", "Salt Lake City", "San Antonio", "San Bernardino", "San Buenaventura", "San Diego", "San Francisco", "San Jose", "Santa Ana", "Santa Barbara", "Santa Clara", "Santa Clarita", "Santa Cruz", "Santa Maria", "Santa Rosa", "Sarasota", "Savannah", "Scottsdale", "Scranton", "Seaside", "Seattle", "Sebastian", "Shreveport", "Simi Valley", "Sioux City", "Sioux Falls", "South Bend", "South Lyon", "Spartanburg", "Spokane", "Springdale", "Springfield", "St. Louis", "St. Paul", "St. Petersburg", "Stamford", "Sterling Heights", "Stockton", "Sunnyvale", "Syracuse", "Tacoma", "Tallahassee", "Tampa", "Temecula", "Tempe", "Thornton", "Thousand Oaks", "Toledo", "Topeka", "Torrance", "Trenton", "Tucson", "Tulsa", "Tuscaloosa", "Tyler", "Utica", "Vallejo", "Vancouver", "Vero Beach", "Victorville", "Virginia Beach", "Visalia", "Waco", "Warren", "Washington", "Waterbury", "Waterloo", "West Covina", "West Valley City", "Westminster", "Wichita", "Wilmington", "Winston", "Winter Haven", "Worcester", "Yakima", "Yonkers", "York", "Youngstown"];
         var stateCapitals = ["Montgomery", "Juneau", "Phoenix", "Little Rock", "Sacramento", "Denver", "Hartford", "Dover", "Tallahassee", "Atlanta", "Honolulu", "Boise", "Springfield", "Indianapolis", "Des Moines", "Topeka", "Frankfort", "Baton Rouge", "Augusta", "Annapolis", "Boston", "Lansing", "Saint Paul", "Jackson", "Jefferson City", "Helena", "Lincoln", "Carson City", "Concord", "Trenton", "Santa Fe", "Albany", "Raleigh", "Bismarck", "Columbus", "Oklahoma City", "Salem", "Harrisburg", "Providence", "Columbia", "Pierre", "Nashville", "Austin", "Salt Lake City", "Montpelier", "Richmond", "Olympia", "Charleston", "Madison", "Cheyenne"];
         
@@ -216,7 +216,7 @@
         //world geography
         var europeanCountries = ["Albania", "Andorra", "Armenia", "Austria", "Azerbaijan", "Belarus", "Belgium", "Bosnia and Herzegovina", "Bulgaria", "Croatia", "Cyprus", "Czech Republic", "Denmark", "Estonia", "Finland", "France", "Georgia", "Germany", "Greece", "Hungary", "Iceland", "Ireland", "Italy", "Kosovo", "Latvia", "Liechtenstein", "Lithuania", "Luxembourg", "Macedonia", "Malta", "Moldova", "Monaco", "Montenegro", "The Netherlands", "Norway", "Poland", "Portugal", "Romania", "Russia", "San Marino", "Serbia", "Slovakia", "Slovenia", "Spain", "Sweden", "Switzerland", "Turkey", "Ukraine", "United Kingdom", "Vatican City"];
         var asianCountries = ["Afghanistan", "Armenia", "Azerbaijan", "Bahrain", "Bangladesh", "Bhutan", "Brunei", "Cambodia", "China", "Cyprus", "Georgia", "India", "Indonesia", "Iran", "Iraq", "Israel", "Japan", "Jordan", "Kazakhstan", "Kuwait", "Kyrgyzstan", "Laos", "Lebanon", "Malaysia", "Maldives", "Mongolia", "Myanmar", "Nepal", "North Korea", "Oman", "Pakistan", "Palestine", "Philippines", "Qatar", "Russia", "Saudi Arabia", "Singapore", "South Korea", "Sri Lanka", "Syria", "Taiwan", "Tajikistan", "Thailand", "Timor-Leste", "Turkey", "Turkmenistan", "United Arab Emirates", "Uzbekistan", "Vietnam", "Yemen"];
-        var africanCountries = ["Algeria", "Angola", "Benin", "Botswana", "Burkina Faso", "Burundi", "Cabo Verde", "Cameroon", "Central African Republic", "Chad", "Comoros", "Democratic Republic of the Congo", "Republic of the Congo", "Cote d'Ivoire", "Djibouti", "Egypt", "Equatorial Guinea", "Eritrea", "Eswatini", "Ethiopia", "Gabon", "Gambia", "Ghana", "Guinea", "Guinea-Bissau", "Kenya", "Lesotho", "Liberia", "Libya", "Madagascar", "Malawi", "Mali", "Mauritania", "Mauritius", "Morocco", "Mozambique", "Namibia", "Niger", "Nigeria", "Rwanda", "Sao Tome and Principe", "Senegal", "Seychelles", "Sierra Leone", "Somalia", "South Africa", "South Sudan", "Sudan", "Swaziland", "Tanzania", "Togo", "Tunisia", "Uganda", "Zambia", "Zimbabwe"];
+        var africanCountries = ["Algeria", "Angola", "Benin", "Botswana", "Burkina Faso", "Burundi", "Cabo Verde", "Cameroon", "Central African Republic", "Chad", "Comoros", "Democratic Republic of the Congo", "Republic of the Congo", "Djibouti", "Egypt", "Equatorial Guinea", "Eritrea", "Eswatini", "Ethiopia", "Gabon", "Gambia", "Ghana", "Guinea", "Guinea-Bissau", "Kenya", "Lesotho", "Liberia", "Libya", "Madagascar", "Malawi", "Mali", "Mauritania", "Mauritius", "Morocco", "Mozambique", "Namibia", "Niger", "Nigeria", "Rwanda", "Sao Tome and Principe", "Senegal", "Seychelles", "Sierra Leone", "Somalia", "South Africa", "South Sudan", "Sudan", "Swaziland", "Tanzania", "Togo", "Tunisia", "Uganda", "Zambia", "Zimbabwe"];
         var naCountries = ["Antigua and Barbuda", "Bahamas", "Barbados", "Belize", "Canada", "Costa Rica", "Cuba", "Dominica", "Dominican Republic", "El Salvador", "Grenada", "Guatemala", "Haiti", "Honduras", "Jamaica", "Mexico", "Nicaragua", "Panama", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Trinidad and Tobago", "United States of America"];
         var saCountries = ["Argentina", "Bolivia", "Brazil", "Chile", "Colombia", "Ecuador", "Guyana", "Paraguay", "Peru", "Suriname", "Uruguay", "Venezuela"];
 
@@ -244,7 +244,7 @@
         var characterIsAnimating = false;
         var movementAnimationSpeed = 400;
         var digAnimationSpeed = 800;
-
+        var amIThereYet = false;
         var gameStatus = true;
 
         var score = 5;
@@ -1190,6 +1190,10 @@
             var animationSource = "";
             var animationAxis = "";
             if(direction===1){
+                var currentValue = $(".character").data("value");
+                var nextValue = $("#square"+(currrentSquare+direction)).data("value");
+                console.log(currentValue);
+
                 characterIsAnimating = true;
                 animationDirection = -(centerHorizontal);
                 animationAxis = "margin-right";
@@ -1560,154 +1564,153 @@
             var goalSquare = parseInt($(this).attr("id").replace('square', ''));
             console.log(characterSquare);
             console.log(goalSquare);
-            if(characterIsAnimating===false){
-                if(characterSquare!==goalSquare){
-                    if((Math.ceil(characterSquare/6)===Math.ceil(goalSquare/6))){
-                        if(characterSquare>goalSquare){
-                            console.log("move left");
-                            moveCharacter(characterSquare, -1);
-                        }
-                        else{
-                            console.log("move right");
-                            moveCharacter(characterSquare, 1);
-                        }
+            if(characterSquare!==goalSquare){
+                if((Math.ceil(characterSquare/6)===Math.ceil(goalSquare/6))){
+                    if(characterSquare>goalSquare){
+                        console.log("move left");
+                        moveCharacter(characterSquare, -1);
                     }
-                    else if((characterSquare-goalSquare)>0){
-                        console.log("up");
-                        moveCharacter(characterSquare, -6);
-                    }
-                    else if((characterSquare-goalSquare)<0){
-                        console.log("down");
-                        moveCharacter(characterSquare, 6);
+                    else{
+                        console.log("move right");
+                        moveCharacter(characterSquare, 1);
                     }
                 }
-                else{
-                    characterIsAnimating = true;
-                    var currrentSquare = characterSquare
-                    animationDirection = 0;
-                    animationAxis = "margin-right";
-                    animationSource = "./assets/images/animations/dig.gif";
-                    $("#guybrush").attr("src", animationSource);
-                    $(".character").css("background-color", "transparent");
-                    $('#guybrush').animate({"right": animationDirection}, digAnimationSpeed, function(){
-                        $(".character img:last-child").remove();
-                        $(".character").prepend('<img id="guybrush" src="./assets/images/standing.png" />')
-                        characterIsAnimating = false;
-                        if(gameMode===1){
-                            pointChecker(multiplesArray, currrentSquare);
+                else if((characterSquare-goalSquare)>0){
+                    console.log("up");
+                    moveCharacter(characterSquare, -6);
+                }
+                else if((characterSquare-goalSquare)<0){
+                    console.log("down");
+                    moveCharacter(characterSquare, 6);
+                }
+            }
+            else{
+                characterIsAnimating = true;
+                var currrentSquare = characterSquare
+                animationDirection = 0;
+                animationAxis = "margin-right";
+                animationSource = "./assets/images/animations/dig.gif";
+                $("#guybrush").attr("src", animationSource);
+                $(".character").css("background-color", "transparent");
+                $('#guybrush').animate({"right": animationDirection}, digAnimationSpeed, function(){
+                    $(".character img:last-child").remove();
+                    $(".character").prepend('<img id="guybrush" src="./assets/images/standing.png" />')
+                    characterIsAnimating = false;
+                    if(gameMode===1){
+                        pointChecker(multiplesArray, currrentSquare);
+                    }
+                    else if(gameMode===2){
+                        pointChecker(factors, currrentSquare);
+                    }
+                    else if(gameMode===3){
+                        pointChecker(primeNumbers, currrentSquare);
+                    }
+                    else if(gameMode===4){
+                        console.log("this is a tset");
+                        if($("#square"+currrentSquare).data('value')===expressionValue&&$("#square"+currrentSquare).data('value')!==""){
+                            eatNumber(currrentSquare);
                         }
-                        else if(gameMode===2){
-                            pointChecker(factors, currrentSquare);
+                        else if($("#square"+currrentSquare).data('value')!==expressionValue&&$("#square"+currrentSquare).data('value')!==""){
+                            $(".character").css("border-color", "red");
+                            score-=5;
                         }
-                        else if(gameMode===3){
-                            pointChecker(primeNumbers, currrentSquare);
+                        $("#remaining").text("Remaining "+correctRemaining);
+                    }
+                    else if(gameMode===5){
+                        if($("#square"+currrentSquare).data('value')!==expressionValue){
+                            eatNumber(currrentSquare);
                         }
-                        else if(gameMode===4){
-                            console.log("this is a tset");
-                            if($("#square"+currrentSquare).data('value')===expressionValue&&$("#square"+currrentSquare).data('value')!==""){
-                                eatNumber(currrentSquare);
-                            }
-                            else if($("#square"+currrentSquare).data('value')!==expressionValue&&$("#square"+currrentSquare).data('value')!==""){
-                                $(".character").css("border-color", "red");
-                                score-=5;
-                            }
-                            $("#remaining").text("Remaining "+correctRemaining);
+                        else if($("#square"+currrentSquare).data('value')!==expressionValue&&$("#square"+currrentSquare).data('value')===""){
+                            $(".character").css("border-color", "red");
+                            score-=5;
                         }
-                        else if(gameMode===5){
-                            if($("#square"+currrentSquare).data('value')!==expressionValue){
-                                eatNumber(currrentSquare);
-                            }
-                            else if($("#square"+currrentSquare).data('value')!==expressionValue&&$("#square"+currrentSquare).data('value')===""){
-                                $(".character").css("border-color", "red");
-                                score-=5;
-                            }
-                            $("#remaining").text("Remaining "+correctRemaining);
-                        }
-                        else if(gameMode===6){
-                            pointChecker(statesArray, currrentSquare);
-                        }
-                        else if(gameMode===7){
-                            pointChecker(majorCities, currrentSquare);
-                        }
-                        else if(gameMode===8){
-                            pointChecker(stateCapitals, currrentSquare);
-                        }
-                        else if(gameMode===9){
-                            pointChecker(randomStateFlags, currrentSquare);
-                        }
-                        else if(gameMode===10){
-                            var oceanState = pacificOceanStates.concat(atlanticOceanStates);
-                            pointChecker(oceanState, currrentSquare);
-                        }
-                        else if(gameMode===11){
-                            pointChecker(pacificOceanStates, currrentSquare);
-                        }
-                        else if(gameMode===12){
-                            pointChecker(atlanticOceanStates, currrentSquare);
-                        }
-                        else if(gameMode===13){
-                            pointChecker(mexicoBorderStates, currrentSquare);
-                        }
-                        else if(gameMode===14){
-                            pointChecker(canadaBorderStates, currrentSquare);
-                        }
-                        else if(gameMode===15){
-                            pointChecker(unionStates, currrentSquare);
-                        }
-                        else if(gameMode===16){
-                            pointChecker(confederateStates, currrentSquare);
-                        }
-                        else if(gameMode===17){
-                            pointChecker(civilWarBorderStates, currrentSquare);
-                        }
-                        else if(gameMode===18){
-                            pointChecker(originalColonies, currrentSquare);
-                        }
-                        else if(gameMode===19){
-                            pointChecker(europeanCountries, currrentSquare);
-                        }
-                        else if(gameMode===20){
-                            pointChecker(asianCountries, currrentSquare);
-                        }
-                        else if(gameMode===21){
-                            pointChecker(africanCountries, currrentSquare);
-                        }
-                        else if(gameMode===22){
-                            pointChecker(naCountries, currrentSquare);
-                        }
-                        else if(gameMode===23){
-                            pointChecker(saCountries, currrentSquare);
-                        }
-                        else if(gameMode===24){
-                            pointChecker(countriesInEU, currrentSquare);
-                        }
-                        else if(gameMode===25){
-                            pointChecker(nativeEnglishSpeaking, currrentSquare);
-                        }
-                        else if(gameMode===26){
-                            pointChecker(ww1Countries, currrentSquare);
-                        }
-                        else if(gameMode===27){
-                            pointChecker(adjectives, currrentSquare);
-                        }
-                        else if(gameMode===28){
-                            pointChecker(verbs, currrentSquare);
-                        }
-                        else if(gameMode===29){
-                            pointChecker(nouns, currrentSquare);
-                        }
-                        else if(gameMode===30){
-                            pointChecker(adverbs, currrentSquare);
-                        }
-                        else if(gameMode===31){
-                            pointChecker(randomWorldFlags, currrentSquare);
-                        }
-                        else{
+                        $("#remaining").text("Remaining "+correctRemaining);
+                    }
+                    else if(gameMode===6){
+                        pointChecker(statesArray, currrentSquare);
+                    }
+                    else if(gameMode===7){
+                        pointChecker(majorCities, currrentSquare);
+                    }
+                    else if(gameMode===8){
+                        pointChecker(stateCapitals, currrentSquare);
+                    }
+                    else if(gameMode===9){
+                        pointChecker(randomStateFlags, currrentSquare);
+                    }
+                    else if(gameMode===10){
+                        var oceanState = pacificOceanStates.concat(atlanticOceanStates);
+                        pointChecker(oceanState, currrentSquare);
+                    }
+                    else if(gameMode===11){
+                        pointChecker(pacificOceanStates, currrentSquare);
+                    }
+                    else if(gameMode===12){
+                        pointChecker(atlanticOceanStates, currrentSquare);
+                    }
+                    else if(gameMode===13){
+                        pointChecker(mexicoBorderStates, currrentSquare);
+                    }
+                    else if(gameMode===14){
+                        pointChecker(canadaBorderStates, currrentSquare);
+                    }
+                    else if(gameMode===15){
+                        pointChecker(unionStates, currrentSquare);
+                    }
+                    else if(gameMode===16){
+                        pointChecker(confederateStates, currrentSquare);
+                    }
+                    else if(gameMode===17){
+                        pointChecker(civilWarBorderStates, currrentSquare);
+                    }
+                    else if(gameMode===18){
+                        pointChecker(originalColonies, currrentSquare);
+                    }
+                    else if(gameMode===19){
+                        pointChecker(europeanCountries, currrentSquare);
+                    }
+                    else if(gameMode===20){
+                        pointChecker(asianCountries, currrentSquare);
+                    }
+                    else if(gameMode===21){
+                        pointChecker(africanCountries, currrentSquare);
+                    }
+                    else if(gameMode===22){
+                        pointChecker(naCountries, currrentSquare);
+                    }
+                    else if(gameMode===23){
+                        pointChecker(saCountries, currrentSquare);
+                    }
+                    else if(gameMode===24){
+                        pointChecker(countriesInEU, currrentSquare);
+                    }
+                    else if(gameMode===25){
+                        pointChecker(nativeEnglishSpeaking, currrentSquare);
+                    }
+                    else if(gameMode===26){
+                        pointChecker(ww1Countries, currrentSquare);
+                    }
+                    else if(gameMode===27){
+                        pointChecker(adjectives, currrentSquare);
+                    }
+                    else if(gameMode===28){
+                        pointChecker(verbs, currrentSquare);
+                    }
+                    else if(gameMode===29){
+                        pointChecker(nouns, currrentSquare);
+                    }
+                    else if(gameMode===30){
+                        pointChecker(adverbs, currrentSquare);
+                    }
+                    else if(gameMode===31){
+                        pointChecker(randomWorldFlags, currrentSquare);
+                    }
+                    else{
 
-                        }
-                        $("#score").text("Score is "+score);
-                    });
-                }
+                    }
+                    $("#score").text("Score is "+score);
+                });
+                
             }
             for(var i = 1; i<31; i++){
                 if($("#square"+i).data("value")===""){
