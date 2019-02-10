@@ -175,7 +175,7 @@ function start() {
         .prompt({
             name: "profession",
             type: "list",
-            message: "Many kind of people made the trip to Oregon.\n You may:",
+            message: "\nMany kind of people made the trip to Oregon.\n You may:",
             choices: ["Be a banker from Boston", "Be a carpenter from Ohio", "Be a farmer from Illinois"]
         })
         .then(function(answer) {
@@ -201,7 +201,7 @@ function namePlayers(){
         .prompt([{
             name: "player1",
             type: "input",
-            message: "What is the first name of the wagon leader?",
+            message: "\nWhat is the first name of the wagon leader?",
         },
         {
             name: "player2",
@@ -243,7 +243,7 @@ function pickStartTime(){
         .prompt({
             name: "month",
             type: "list",
-            message: "It is 1848. Your jumping off place for Oregon is Independence, Missouri. You must decide which month to leave Independence.",
+            message: "\nIt is 1848. Your jumping off place for Oregon is Independence, Missouri. You must decide which month to leave Independence.",
             choices: ["March", "April", "May", "June", "July"]
         })
         .then(function(answer) {
@@ -284,8 +284,9 @@ function gameLoop(){
     var monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
     var currentDateObject = addDays(daysTravelled);
     getWeatherConditions(currentDateObject);
+    console.log("------------------------------");
     console.log("\nIt is " + monthNames[currentDateObject.getMonth()] +" "+ currentDateObject.getDate()+", "+currentDateObject.getFullYear() + ".\n");
-    console.log("The current weather is "+currentWeather+".");
+    console.log("The current weather is "+currentWeather+".\n");
     if(atCamp){
         offerChoices = ["Continue on trail", "Check supplies", "Look at map", "Change pace", "Change food rations", "Stop to rest", "Attempt to trade", "Talk to People"];
     }
@@ -1044,7 +1045,7 @@ function buySupplies(){
         .prompt([{
             name: "oxen",
             type: "input",
-            message: "I recommend having at least 6 oxen at all times. I charge $"+(20+fortCounter*5)+" an ox.\nHow many oxen do you want?",
+            message: "\nI recommend having at least 6 oxen at all times. I charge $"+(20+fortCounter*5)+" an ox.\nHow many oxen do you want?",
         },
         {
             name: "food",
