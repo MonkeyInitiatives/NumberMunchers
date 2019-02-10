@@ -47,7 +47,7 @@ var inventory = {
     tongues: 0,
     money: 100
 };
-var milesToGo = 2000;
+var milesToGo = 1863;
 var pace = 1;
 var rations = 1;
 var trailConditions = 0;
@@ -58,92 +58,115 @@ var landmarks = [
     {
         name : "Kansas River Crossing",
         miles : 102,
-        type : "river"
+        type : "river",
+        modifier : "flatland"
     },
     {
         name : "Big Blue River Crossing",
         miles : 83,
-        type : "river" 
+        type : "river",
+        modifier : "flatland" 
     },
     {
         name : "Fort Kearney",
         miles : 119,
-        type : "fort" 
+        type : "fort",
+        modifier : "flatland" 
     },
     {
         name : "Chimney Rock",
         miles : 250,
-        type : "camp" 
+        type : "camp",
+        modifier : "disease" 
     },
     {
         name : "Fort Laramie",
         miles : 86,
-        type : "fort" 
+        type : "fort",
+        modifier : "mountains"
     },
     {
         name : "Independence Rock",
         miles : 190,
-        type : "camp" 
+        type : "camp",
+        modifier : "mountains" 
     },
     {
         name : "South Pass",
         miles : 102,
-        type : "camp" 
+        type : "camp",
+        modifier : "mountains"
     },
     {
         name : "Green River",
         miles : 57,
-        type : "river" 
+        type : "river",
+        modifier : "disease"
     },
     {
         name : "Soda Springs",
         miles : 144,
-        type : "camp" 
+        type : "camp",
+        modifier : "disease"
     },
     {
         name : "Fort Hall",
         miles : 57,
-        type : "fort" 
+        type : "fort",
+        modifier : "rockies"
     },
     {
         name : "Snake River Crossing",
         miles : 182,
-        type : "river" 
+        type : "river",
+        modifier : "rockies"
     },
     {
         name : "Fort Boise",
         miles : 114,
-        type : "fort" 
+        type : "fort",
+        modifier : "rockies"
     },
     {
         name : "Blue Mountains",
         miles : 102,
-        type : "camp" 
+        type : "camp",
+        modifier : "rockies" 
     },
     {
         name : "Fort Walla Walla",
         miles : 55,
-        type : "fort" 
+        type : "fort",
+        modifier : "flatland"
     },
     {
         name : "The Dalles",
         miles : 120,
-        type : "river" 
+        type : "river",
+        modifier : "flatland" 
     },
     {
         name : "Barlow Toll Road",
         miles : 100,
-        type : "camp" 
+        type : "camp",
+        modifier : "flatland" 
     },
     {
-        name : "Oregon",
-        miles : 100,
-        type : "camp" 
+        name : "The Willamette Valley, Oregon",
+        miles : 37,
+        type : "camp",
+        modifier : "flatland" 
     }
 ];
 var atFort = false;
 var atCamp = false;
 var atRiver = false;
+var oxModifier = 1;
+var repairModifier = 1;
+var daysTravelled = 0;
+var currentlyStuck = false;
+var currentWeather = "Fair";
+var riverCounter = 0;
 start();
 
 function start() {
@@ -163,9 +186,11 @@ function start() {
             else if(answer.profession === "Be a carpenter from Ohio") {
                 occupation = "Carpenter";
                 inventory.money = 800;
+                repairModifier = 2;
             } else{
                 occupation = "Farmer";
                 inventory.money = 400;
+                oxModifier = 2;
             }
         namePlayers();
     });
@@ -231,8 +256,36 @@ function startStore(){
     buySupplies();
 }
 
+function getWeatherConditions(currentDateObject){
+    var currentMonth = currentDateObject.getMonth();
+    // console.log(currentMonth);
+    //0,1,2 is winter. 6, 7, 8 is summer
+    //4 and 5 slight summer, 11, 12 slight winter
+    if(currentMonth >=0 && currentMonth<3){
+        currentWeather = "cold";
+    }
+    else if(currentMonth>=6 && currentMonth<9){
+        currentWeather = "hot";
+    }
+    else if(currentMonth===4 || currentMonth===5){
+        currentWeather = "warm";
+    }
+    else if(currentMonth===11 || currentMonth===12){
+        currentWeather = "cool";
+    }
+    else{
+        currentWeather = "fair";
+    }
+}
+
 function gameLoop(){
+    checkGameOver();
     var offerChoices = ["Continue on trail", "Check supplies", "Look at map", "Change pace", "Change food rations", "Stop to rest", "Hunt"];
+    var monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
+    var currentDateObject = addDays(daysTravelled);
+    getWeatherConditions(currentDateObject);
+    console.log("\nIt is " + monthNames[currentDateObject.getMonth()] +" "+ currentDateObject.getDate()+", "+currentDateObject.getFullYear() + ".\n");
+    console.log("The current weather is "+currentWeather+".");
     if(atCamp){
         offerChoices = ["Continue on trail", "Check supplies", "Look at map", "Change pace", "Change food rations", "Stop to rest", "Attempt to trade", "Talk to People"];
     }
@@ -252,7 +305,13 @@ function gameLoop(){
         .then(function(answer) {
             switch (answer.turn) {
                 case "Continue on trail":
-                    continueTrail();
+                    if(currentlyStuck){
+                        console.log("\nYou cannot continue on the trail at this time. Attempt to trade or buy supplies!\n");
+                        gameLoop();
+                    }
+                    else{
+                        continueTrail();
+                    }
                     break;
                 case "Check supplies":
                     checkSupplies();
@@ -292,7 +351,14 @@ function continueTrail(){
     atFort = false;
     atRiver = false;
     var milesTraveled = 0;
-    milesTraveled = (inventory.oxen)*pace;
+    daysTravelled++;
+    if(nextLandmark.modifier==="flatland"){
+        trailConditions = 5;
+    }
+    else{
+        trailConditions = 0;
+    }
+    milesTraveled = (inventory.oxen)*pace+Math.floor(Math.random() * (2*trailConditions) +1);
     if(milesTraveled>40){
         milesTraveled = 40;
     }
@@ -303,20 +369,25 @@ function continueTrail(){
     else{
         console.log("");
         console.log(nextLandmark.miles + " miles to reach " + nextLandmark.name);
-
+        milesToGo -= milesTraveled;
         var poundsEaten = 0;
         var peopleAlive = 0;
-
-        var trailProblem = Math.floor(Math.random() * Math.floor(10-trailConditions))===1;
-        var somethingBroke = Math.floor(Math.random() * Math.floor(15-trailConditions))===1;
-        var oxDied = Math.floor(Math.random() * Math.floor(25))===1;
+        if(nextLandmark.modifier==="rockies"){
+            trailConditions = 5;
+        }
+        else{
+            trailConditions = 0;
+        }
+        var trailProblem = Math.floor(Math.random() * Math.floor(15-trailConditions))===1;
+        var somethingBroke = Math.floor(Math.random() * Math.floor(20-trailConditions))===1;
+        var oxDied = Math.floor(Math.random() * Math.floor(25*oxModifier))===1;
         var wasRobbed = Math.floor(Math.random() * Math.floor(50))===1;
         var wasFire = Math.floor(Math.random() * Math.floor(50))===1;
 
         if(trailProblem){
             var daysDelayed = Math.floor(Math.random() * 5 +1);
             console.log("There's a problem on the trail. You were delayed "+daysDelayed+" days.");
-            rest(daysDelayed);
+            rest(daysDelayed, "problem");
             //subtract food;
         }
         else if(somethingBroke){
@@ -338,7 +409,14 @@ function continueTrail(){
         if(!trailProblem&&!wasRobbed&&!wasFire&&!somethingBroke&&!oxDied){
             for(var i = 0; i<5; i++){
                 if(playerArray[i].isAlive){
-                    var getSick = Math.floor(Math.random() * Math.floor(20));
+                    //disease
+                    if(nextLandmark.modifier==="disease"){
+                        trailConditions = 5;
+                    }
+                    else{
+                        trailConditions = 0;
+                    }
+                    var getSick = Math.floor(Math.random() * Math.floor(20-trailConditions));
                     var justGotSick = false;
                     if(getSick === 1){
                         justGotSick = true;
@@ -374,7 +452,7 @@ function continueTrail(){
                             }
                             console.log(playerArray[i].name + " has " + playerArray[i].condition + ".");
                         }
-                        playerArray[i].health -= 5;
+                        playerArray[i].health -= 7;
                     }
                     if(playerArray[i].isAlive){
                         if(rations === 1 && inventory.food > 0){
@@ -399,13 +477,28 @@ function continueTrail(){
                             playerArray[i].health -= 4;
                         }
                         if(inventory.food === 0){
-                            playerArray[i].health -= 5;
+                            playerArray[i].health -= 7;
+                        }
+                        if(currentWeather === "cold" && inventory.clothing<10)
+                        {
+                            playerArray[i].health -= 3;
+                        }
+                        if(currentWeather === "cool" && inventory.clothing<5){
+                            playerArray[i].health -= 1;
+                        }
+                        if(currentWeather === "hot")
+                        {
+                            playerArray[i].health -= 2;
+                        }
+                        if(currentWeather === "warm")
+                        {
+                            playerArray[i].health -= 1;
                         }
                     }
                     if(playerArray[i].condition!=="none" && !justGotSick){
                         checkCure(playerArray[i], 1+pace);
                         if(playerArray[i].condition==="none"){
-                            console.log(playerArray[i].name + " was cured!");
+                            console.log(playerArray[i].name + " is well again!");
                         }
                     }
                     if(playerArray[i].health<=0&&playerArray[i].isAlive===true)
@@ -417,7 +510,6 @@ function continueTrail(){
                     }
                 }
             }
-            milesToGo -= milesTraveled;
             inventory.food -= poundsEaten;
             if(peopleAlive<=0){
                 gameLost();
@@ -429,19 +521,24 @@ function continueTrail(){
 }
 
 function gameLost(){
-    console.log("Everyone in your party is dead. Game over!");
-    process.exit();
+    console.log("\nEveryone in your party is dead. Game over!\n");
+    getScore("lost");
 }
 
 function playerDied(thePlayer){
     console.log("");
-    console.log(thePlayer.name + " has died!");
+    if(thePlayer.condition!="none"){
+        console.log(thePlayer.name + " has died of "+ thePlayer.condition+"!");
+    }
+    else{
+        console.log(thePlayer.name + " got sick and died!");
+    }
     thePlayer.isAlive = false;
     console.log("");
 }
 
 function landmark(){
-    if(nextLandmark.name == "Oregon"){
+    if(nextLandmark.name == "The Willamette Valley, Oregon"){
         gameWon();
     }
     console.log("You have arrived at " + nextLandmark.name);
@@ -466,18 +563,97 @@ function oxenDied(){
         console.log("An ox died.\n");
         inventory.oxen--;
     }
-    gameLoop();
+    if(inventory.oxen<=0){
+        currentlyStuck = true;
+        foreverStuck();
+    }
+    else{
+        gameLoop();
+    }
 }
 
 function partBroke(){
     console.log("Something on your wagon broke and must be repaired or replaced.\n");
     var partBroke = Math.floor(Math.random() * 3 +1);
-    gameLoop();
+    if(partBroke===1){
+        console.log("\nA wagon wheel broke! You must repair or replace it!\n");
+        var didRepair = Math.floor(Math.random() * 4 +1);
+        if(didRepair===1||didRepair===repairModifier){
+            console.log("\nYou were able to repair it!\n");
+            gameLoop();
+        }
+        else if(inventory.wheels>0){
+            console.log("\nYou were unable to repair it, but were able to replace it!\n");
+            inventory.wheels--;
+            gameLoop();
+        }
+        else{
+            console.log("\nYou were unable to repair or replace it! You must attempt to trade for a new part before continuing!\n");
+            currentlyStuck = true;
+            foreverStuck();
+            // gameLoop();
+        }
+    }
+    else if(partBroke===2){
+        console.log("\nA wagon axel broke! You must repair or replace it!\n");
+        var didRepair = Math.floor(Math.random() * 4 +1);
+        if(didRepair===1||didRepair===repairModifier){
+            console.log("\nYou were able to repair it!\n");
+            gameLoop();
+        }
+        else if(inventory.axels>0){
+            console.log("\nYou were unable to repair it, but were able to replace it!\n");
+            inventory.axels--;
+            gameLoop();
+        }
+        else{
+            console.log("\nYou were unable to repair or replace it! You must attempt to trade for a new part before continuing!\n");
+            currentlyStuck = true;
+            foreverStuck();
+            // gameLoop();
+        }
+    }
+    else{
+        console.log("\nA wagon tongue broke! You must repair or replace it!\n");
+        var didRepair = Math.floor(Math.random() * 4 +1);
+        if(didRepair===1||didRepair===repairModifier){
+            console.log("\nYou were able to repair it!\n");
+            gameLoop();
+        }
+        else if(inventory.tongues>0){
+            console.log("\nYou were unable to repair it, but were able to replace it!\n");
+            inventory.tongues--;
+            gameLoop();
+        }
+        else{
+            console.log("\nYou were unable to repair or replace it! You must attempt to trade for a new part before continuing!\n");
+            currentlyStuck = true;
+            foreverStuck();
+            // gameLoop();
+        }
+    }
+
+
+    
+}
+
+function addDays(days) {
+    //Month is "April", year is "1848", day is 01.
+    var monthNumber = new Date(Date.parse(startMonth +" 1, 1848")).getMonth();
+    var result = new Date("1848", monthNumber, "1");
+    // console.log(result);
+    result.setDate(result.getDate() + days);
+    return result;
 }
 
 function fortArrival(){
     atFort = true;
     gameLoop();
+}
+
+function foreverStuck(){
+    console.log("\nYou cannot continue on the journey anymore! Game over!\n");
+    getScore("stuck");
 }
 
 function campArrival(){
@@ -487,14 +663,22 @@ function campArrival(){
 
 function riverCrossing(){
     atRiver = true;
-    var riverDepth = (Math.random()*6+1).toFixed(1);
-    var riverWidth = Math.floor(Math.random() * 800) + 400;
+    riverCounter++;
+    var riverModifier = 1;
+    if(currentWeather==="hot"){
+        riverModifier = 3;
+    }
+    if(currentWeather==="warm"){
+        riverModifier = 2;
+    }
+    var riverDepth = (Math.random()*(4-riverModifier+riverCounter)+1).toFixed(1);
+    var riverWidth = Math.floor(Math.random() * (225+(50*(riverCounter/riverModifier)))) + 400;
     inquirer
         .prompt({
             name: "choice",
             type: "list",
             message: "You must cross the river in order to continue. The river at this point is currently "+riverWidth+" feet across, and "+riverDepth+" feet deep in the middle.\nYou may:",
-            choices: ["attempt to ford the river", "caulk the wagon and float it across", "take a ferry across", "wait to see if conditions improve"]
+            choices: ["attempt to ford the river", "caulk the wagon and float it across", "take a ferry across the river for $"+(4+riverCounter)+".00.", "wait to see if conditions improve"]
         })
         .then(function(answer) {
             if(answer.choice === "attempt to ford the river"){
@@ -527,24 +711,52 @@ function riverCrossing(){
                     gameLoop();
                 }
             }
-            else if(answer.choice === "take a ferry across"){
-                console.log("You made it safely across the river.");
-                gameLoop();
+            // else if(answer.choice === "take a ferry across"){
+            //     console.log("You made it safely across the river.");
+            //     gameLoop();
+            // }
+            else if(answer.choice === "wait to see if conditions improve"){
+                //this isn't working correctly
+                riverWaiting();
             }
             else{
-                //this isn't working correctly
-                rest(1);
-                riverCrossing();
+                if(inventory.money>=(4+riverCounter)){
+                    inventory.money-=(4+riverCounter);
+                    console.log("You made it safely across the river.");
+                    gameLoop();
+                }
+                else{
+                    console.log("You don't have enough money to take the ferry!");
+                }
             }
     });
+}
+
+function riverWaiting(){
+    console.log("\nYou waited 1 day for conditions to change.\n");
+    riverCounter--;
+    rest(1, "river");
+    riverCrossing();
 }
 
 function disaster(disasterType){
     if(disasterType === "river"){
         console.log("The river is too deep to ford. You lost:");
+        for(var i = 0; i<5; i++){
+            if(playerArray[i].isAlive && (Math.floor(Math.random() * 15) == 0)){
+                console.log(playerArray[i].name + " (drowned)");
+                playerArray[i].isAlive = false;
+            }
+        }
     }
     else if(disasterType === "fire"){
         console.log("There was a fire! You lose:");
+        for(var i = 0; i<5; i++){
+            if(playerArray[i].isAlive && (Math.floor(Math.random() * 15) == 0)){
+                console.log(playerArray[i].name + " (burned)");
+                playerArray[i].isAlive = false;
+            }
+        }
     }
     else{
         console.log("A thief broke into your wagon in the middle of night! You lost:");
@@ -552,7 +764,7 @@ function disaster(disasterType){
     for(var key in inventory){
         if(inventory[key]>0 && (Math.floor(Math.random() * 2) == 0)){
             var numberLost = Math.floor(Math.random() * inventory[key] + 1);
-            if(numberLost>0&&key!=="oxen"){
+            if(numberLost>0){
                 inventory[key]=inventory[key]-numberLost;
                 console.log(numberLost+" "+key);
             }
@@ -563,7 +775,8 @@ function disaster(disasterType){
 }
 
 function gameWon(){
-    getScore();
+    console.log("\nYou made it to Oregon!\n");
+    getScore("won");
 }
 
 function checkSupplies(){
@@ -604,7 +817,8 @@ function checkSupplies(){
 
 function lookMap(){
     console.log("");
-    console.log("You have " + nextLandmark.miles + " miles to go!");
+    console.log(nextLandmark.name + " is " + nextLandmark.miles + " miles away!");
+    console.log("You have a total of " + milesToGo + " miles to go for your entire journey!");
     console.log("");
     gameLoop();
 
@@ -654,18 +868,21 @@ function changeRations(){
     });
 }
 
-function rest(numberOfDays){
-    console.log("You rested " + numberOfDays + " days.\n");
+function rest(numberOfDays, whyRest){
+    if(whyRest==="rest"){
+        console.log("You rested " + numberOfDays + " days.\n");
+    }
     for(var i = 0; i<numberOfDays; i++){
+        daysTravelled++;
         for(var j = 0; j<5; j++)
         {
-            if(playerArray[j].health<=98){
-                playerArray[j].health +=2;
+            if(playerArray[j].health<=97){
+                playerArray[j].health +=3;
             }
-            if(playerArray[j].condition!=="none"){
+            if(playerArray[j].condition!=="none"&&whyRest!=="problem"){
                 checkCure(playerArray[j], 1);
                 if(playerArray[j].condition==="none"){
-                    console.log(playerArray[j].name + " was cured!");
+                    console.log(playerArray[j].name + " is well again!");
                 }
             }
             if(rations === 1 && inventory.food > 0){
@@ -682,11 +899,13 @@ function rest(numberOfDays){
             }
             if(inventory.food <= 0)
             {
-                playerArray[j].health -= 3;
+                playerArray[j].health -= 5;
             }
         }
     }
-    gameLoop();
+    if(whyRest!=="river"){
+        gameLoop();
+    }
 }
 
 function stopToRest(){
@@ -698,7 +917,7 @@ function stopToRest(){
         })
         .then(function(answer) {
             // console.log("You rested " + answer.rest + " days");
-            rest(answer.rest);
+            rest(answer.rest, "rest");
     });
 }
 
@@ -726,6 +945,7 @@ function hunt(){
         console.log("\nBANG! BANG!\nYou fired "+shotsFired+" times and got "+poundsOfFood+" pounds of food.\n");
         inventory.ammunition -= shotsFired;
         inventory.food += poundsOfFood;
+        daysTravelled++;
     }
     else{
         console.log("\nYou don't have enough ammunition!\n");
@@ -733,94 +953,90 @@ function hunt(){
     gameLoop();
 }
 
-function getScore(){
-    console.log("\nYou made it to Oregon!\n");
-    var score = 50;
-    for(var i = 0; i<5; i++){
-        if(playerArray[i].isAlive){
-            if(playerArray[i].health>80){
-                score += 500;
-            }
-            else if(playerArray[i].health>60){
-                score += 400;
-            }
-            else if(playerArray[i].health>40){
-                score += 300;
-            }
-            else if(playerArray[i].health>20){
-                score += 200;
-            }
-            else{
-                score += 100;
-            }
-        }
-    }
-
-    for(var key in inventory){
-        if(inventory[key]<0){
-            inventory[key]=0;
-        }
-        if(key==="oxen"){
-            score+=inventory[key]*4;
-        }
-        if(key==="food"){
-            score+=inventory[key]/25;
-        }
-        if(key==="clothing"){
-            score+=inventory[key]*2;
-        }
-        if(key==="ammunition"){
-            score+=inventory[key]/50;
-        }
-        if(key==="wheel"){
-            score+=inventory[key]*2;
-        }
-        if(key==="axels"){
-            score+=inventory[key]*2;
-        }
-        if(key==="tongues"){
-            score+=inventory[key]*2;
-        }
-        if(key==="money"){
-            score+=inventory[key]/5;
-        }
-    }
-
-
-
-    // oxen: 0,
-    // food: 0,
-    // clothing: 0,
-    // ammunition: 0,
-    // wheels: 0,
-    // axels: 0,
-    // tongues: 0,
-    // money: 100
-
-    /* 500 points * number of survivors--if you are in good health
-    400 points * number of survivors--if you are in fair health
-    300 points * number of survivors--if you are in poor health
-    200 points * number of survivors--if you are in very poor health
+function getScore(winCondition){
     
-    50 points for the wagon
-    4 points for each ox
-    2 points for each spare wagon part
-    2 points for each pair of clothes
-    1 point for each multiple of 50 bullets
-    1 point for each 25-pound ration of food
-    1 point for each $5 you possess in cash */
-    if(occupation==="Banker"){
-        score=score*1;
+    var score = 50;
+    
+    if(winCondition==="won"){
+        for(var i = 0; i<5; i++){
+            if(playerArray[i].isAlive){
+                if(playerArray[i].health>80){
+                    score += 500;
+                }
+                else if(playerArray[i].health>60){
+                    score += 400;
+                }
+                else if(playerArray[i].health>40){
+                    score += 300;
+                }
+                else if(playerArray[i].health>20){
+                    score += 200;
+                }
+                else{
+                    score += 100;
+                }
+            }
+        }
+        for(var key in inventory){
+            if(inventory[key]<0){
+                inventory[key]=0;
+            }
+            if(key==="oxen"){
+                score+=inventory[key]*4;
+            }
+            if(key==="food"){
+                score+=inventory[key]/25;
+            }
+            if(key==="clothing"){
+                score+=inventory[key]*2;
+            }
+            if(key==="ammunition"){
+                score+=inventory[key]/50;
+            }
+            if(key==="wheel"){
+                score+=inventory[key]*2;
+            }
+            if(key==="axels"){
+                score+=inventory[key]*2;
+            }
+            if(key==="tongues"){
+                score+=inventory[key]*2;
+            }
+            if(key==="money"){
+                score+=inventory[key]/5;
+            }
+        }
+        if(occupation==="Banker"){
+            score=score*1;
+        }
+        if(occupation==="Carpenter"){
+            score=score*2;
+        }
+        if(occupation==="Farmer"){
+            score=score*3;
+        }
     }
-    if(occupation==="Carpenter"){
-        score=score*2;
-    }
-    if(occupation==="Farmer"){
-        score=score*3;
-    }
+    score+=(1863-milesToGo);
     console.log("Your final score is: "+parseInt(score, 10));
     process.exit();
 
+}
+
+function checkGameOver(){
+    if(inventory.oxen<=0){
+        currentlyStuck = true;
+        foreverStuck();
+    }
+    var peopleAlive = 0;
+    for(var i = 0; i<5; i++){
+        if(playerArray[i].isAlive){
+            peopleAlive++;
+        }
+    }
+    if(peopleAlive<=0){
+        gameLost();
+    }
+    
 }
 
 function buySupplies(){
