@@ -1,5 +1,6 @@
 var inquirer = require("inquirer");
 const cTable = require('console.table');
+var colors = require('colors');
 
 var money = 0;
 var occupation = "";
@@ -59,103 +60,120 @@ var landmarks = [
         name : "Kansas River Crossing",
         miles : 102,
         type : "river",
-        modifier : "flatland"
+        modifier : "flatland",
+        description: "The Kansas River is a tributary to the Missouri.  It is approximately 170 miles long.  Its width and depth vary depending on the recent amount of snow melt.  Where the Oregon Trail crosses the Kansas River, the average width is 620 feet and the usual depth in the middle is about 4 feet.  But be sure to check the conditions when you get there."
     },
     {
         name : "Big Blue River Crossing",
         miles : 83,
         type : "river",
-        modifier : "flatland" 
+        modifier : "flatland",
+        description: "The Big Blue River is a tributary to the Kansas River, which is in turn a tributary to the Missouri.  It's approximately 300 miles long.  Farther to the south and west is the Little Blue River, which links up with the Big Blue at Blue Rapids.  You'll cross the Big Blue north of the rapids, allowing you to avoid the Little Blue River altogether."
     },
     {
         name : "Fort Kearney",
         miles : 119,
         type : "fort",
-        modifier : "flatland" 
+        modifier : "flatland",
+        description: "Fort Kearney is a U.S. Army post established in 1848 near the Platte River. It garrisons cavalry troops who protect settlers and travelers along the Oregon Trail.  It was named for Gen. Stephen Kearny (often spelled 'Kearney'), who died in 1848 after helping establish law and order in the region and serving in the Mexican War" 
     },
     {
         name : "Chimney Rock",
         miles : 250,
         type : "camp",
-        modifier : "disease" 
+        modifier : "disease",
+        description: "Chimney Rock is an important landmark on the Oregon Trail.  It's a spectacular natural formation of solid rock and can be seen from miles around.  In fact, you can see it for a whole day as you approach it and another whole day as you leave it behind.  If you don't see it at all within a week or so after leaving Fort Kearney, you've probably strayed too far off the trail." 
     },
     {
         name : "Fort Laramie",
         miles : 86,
         type : "fort",
-        modifier : "mountains"
+        modifier : "mountains",
+        description: "Fort Laramie is a US Army post near the junction of the North Platte and Laramie Rivers.  Originally called Fort William, it was founded as a fur-trading post in 1834.  It was renamed for Jacques Laramie, a French trapper who worked in the region earlier in the century.  Fort Laramie is an important stop for resting and getting supplies along the trail."
     },
     {
         name : "Independence Rock",
         miles : 190,
         type : "camp",
-        modifier : "mountains" 
+        modifier : "disease",
+        description: "Independence Rock is an important landmark and resting place along the Oregon Trail. It's a large natural formation, almost 200 feet tall, made of soft stone into which many travelers and traders have carved their names, initials, or brief messages.  It gets its name from the fact that, in order to stay on schedule, travelers try to reach it no later than July 4--Independence Day"
     },
     {
         name : "South Pass",
         miles : 102,
         type : "camp",
-        modifier : "mountains"
+        modifier : "mountains",
+        description: "South Pass is a valley that cuts through the Rocky Mountains at their highest point, the Continental Divide.  It marks the halfway point on your journey to Oregon.  After South Pass, the trail splits.  If you're short on supplies, you should head to Fort Bridger.  But if you don't need supplies, you may want to take the shorter route and go directly to the Green River."
     },
     {
         name : "Green River",
         miles : 57,
         type : "river",
-        modifier : "disease"
+        modifier : "disease",
+        description: "The Green River is a tributary to the Colorado River, flowing south from the Continental Divide along a twisted, rugged path.  It's estimated to be more than 700 miles in length.  It's navigable only at high water, and even then it's extremely dangerous.  But you must cross it before proceeding west on the Oregon Trail, so be very careful."
     },
     {
         name : "Soda Springs",
         miles : 144,
         type : "camp",
-        modifier : "disease"
+        modifier : "disease",
+        description: "Soda Springs is an important landmark and stopping-off point along the trail. It gets its name from the alkaline (sodium) mineral springs you find there. Some travelers separate from the Oregon Trail at this point and head southwest for California.  Others wait until they get to Fort Hall before going on the 'California Trail.'"
     },
     {
         name : "Fort Hall",
         miles : 57,
         type : "fort",
-        modifier : "rockies"
+        modifier : "rockies",
+        description: "Fort Hall is an outpost on the banks of the Snake River.  It was originally a fur-trading post, founded by Nathaniel Wyeth in 1834.  Later it was bought by the Hudson's Bay Company.  Ever since it has served as an important stop along the Oregon Trail, where emigrants can rest and buy supplies.  Some travelers turn southwest at this point and head for California."
     },
     {
         name : "Snake River Crossing",
         miles : 182,
         type : "river",
-        modifier : "rockies"
+        modifier : "rockies",
+        description: "After leaving Fort Hall, the trail follows the Snake River for hundreds of miles.  The Snake River gets its name from the way it twists and turns through this ruffed country, sometimes through steep gorges.  But the trail is fairly flat (through dry and desolate) near the river, which makes wagon travel possible.  Crossing the Snake River, however, can be dangerous."
     },
     {
         name : "Fort Boise",
         miles : 114,
         type : "fort",
-        modifier : "rockies"
+        modifier : "rockies",
+        description: "Fort Boise was built by the Hudson's Bay Company in 1834 as a fur-trading outpost.  Its name comes from the French word 'boise,' meaning 'wooded.' That's because there are lots of trees here, unlike the dry region of the Snake River Plain to the east.  An important stop on the Oregon Trail, it stands on the banks of the Boise River, a tributary to the Snake River."
     },
     {
         name : "Blue Mountains",
         miles : 102,
         type : "camp",
-        modifier : "rockies" 
+        modifier : "rockies",
+        description: "The Grand Ronde (French for 'great ring') is a river that runs roughly parallel to the Blue Mountains.  The Oregon Trail crosses through the Grande Ronde river valley just before the mountains.  The Grande Ronde valley is noted for its beauty and is greatly appreciated by emigrants as a sign that their long journey is nearing its end."
     },
     {
         name : "Fort Walla Walla",
         miles : 55,
         type : "fort",
-        modifier : "flatland"
+        modifier : "flatland",
+        description: "Fort Walla Walla was established in 1818 as a fur-trading post at the juncture of the Columbia and Walla Walla Rivers.  It later became a military fort. Marcus Whitman worked as a medical missionary nearby from 1836 to 1847.  Walla Walla is the name of an American Indian tribe living in the region.  The Walla Wallas are close related to and allied with the Umatila."
     },
     {
         name : "The Dalles",
         miles : 120,
         type : "river",
-        modifier : "flatland" 
+        modifier : "flatland",
+        description: "The Dalles is the chief embarkation point for rafts heading down the Columbia River toward the Willamette Valley.  It was named by French fur-trappers, who likened the deep, stony river gorge to a huge gutter.  (In French, the word 'dalles' can refer to 'gutters' or 'flagstones.') Emigrants to Oregon often stop here to rest and trade before rafting down the Columbia."
     },
     {
         name : "Barlow Toll Road",
         miles : 100,
         type : "camp",
-        modifier : "flatland" 
+        modifier : "flatland",
+        description: "Emigrants who don't want to raft down the Columbia River can take the Barlow Toll Road.  It was cut in 1845 by Samuel Barlow, who obtained a grant from the territorial legislature to charge a toll for its use.  Passing through rough, mountainous terrain, it runs from The Dalles to the Willamette Valley.  It's a difficult 90 miles, but many prefer it to rafting."
     },
     {
         name : "The Willamette Valley, Oregon",
         miles : 37,
         type : "camp",
-        modifier : "flatland" 
+        modifier : "flatland",
+        description: "The Willamette Valley is the goal of most emigrants to Oregon.  The WIllamette River flows north into the Columbia river, running parallel to the Pacific coast, only about 50 miles to the west.  The river has created a wide, fertile valley with some of the best soil in Oregon.  That, plus the mild climate and plenty of rainfall, makes it ideal for farming country."
     }
 ];
 var atFort = false;
@@ -262,19 +280,19 @@ function getWeatherConditions(currentDateObject){
     //0,1,2 is winter. 6, 7, 8 is summer
     //4 and 5 slight summer, 11, 12 slight winter
     if(currentMonth >=0 && currentMonth<3){
-        currentWeather = "cold";
+        currentWeather = "cold".blue;
     }
     else if(currentMonth>=6 && currentMonth<9){
-        currentWeather = "hot";
+        currentWeather = "hot".red;
     }
     else if(currentMonth===4 || currentMonth===5){
-        currentWeather = "warm";
+        currentWeather = "warm".red;
     }
     else if(currentMonth===11 || currentMonth===12){
-        currentWeather = "cool";
+        currentWeather = "cool".blue;
     }
     else{
-        currentWeather = "fair";
+        currentWeather = "fair".gray;
     }
 }
 
@@ -285,6 +303,12 @@ function gameLoop(){
     var currentDateObject = addDays(daysTravelled);
     getWeatherConditions(currentDateObject);
     console.log("------------------------------");
+    // console.log("This is everyone's health\n");
+    // for(var i = 0; i<5; i++){
+    //     if(playerArray[i].isAlive){
+    //         console.log(playerArray[i].health);
+    //     }
+    // }
     console.log("\nIt is " + monthNames[currentDateObject.getMonth()] +" "+ currentDateObject.getDate()+", "+currentDateObject.getFullYear() + ".\n");
     console.log("The current weather is "+currentWeather+".\n");
     if(atCamp){
@@ -387,7 +411,7 @@ function continueTrail(){
 
         if(trailProblem){
             var daysDelayed = Math.floor(Math.random() * 5 +1);
-            console.log("There's a problem on the trail. You were delayed "+daysDelayed+" days.");
+            console.log("There's a problem on the trail. You were delayed ".yellow+daysDelayed+" days.".yellow);
             rest(daysDelayed, "problem");
             //subtract food;
         }
@@ -451,34 +475,34 @@ function continueTrail(){
                                 default:
                                     break;
                             }
-                            console.log(playerArray[i].name + " has " + playerArray[i].condition + ".");
+                            console.log(playerArray[i].name.yellow + " has ".yellow + playerArray[i].condition.yellow + ".".yellow);
                         }
-                        playerArray[i].health -= 7;
+                        playerArray[i].health -= 10;
                     }
                     if(playerArray[i].isAlive){
                         if(rations === 1 && inventory.food > 0){
                             poundsEaten +=3;
-                            playerArray[i].health -= 0;
+                            playerArray[i].health -= 1;
                         }
                         if(rations === 2 && inventory.food > 0){
                             poundsEaten +=2;
-                            playerArray[i].health -= 2;
+                            playerArray[i].health -= 3;
                         }
                         if(rations === 3 && inventory.food > 0){
                             poundsEaten +=1;
-                            playerArray[i].health -= 4;
+                            playerArray[i].health -= 5;
                         }
                         if(pace === 1){
-                            playerArray[i].health -= 1;
+                            playerArray[i].health -= 2;
                         }
                         if(pace === 2){
-                            playerArray[i].health -= 2;
+                            playerArray[i].health -= 3;
                         }
                         if(pace === 3){
                             playerArray[i].health -= 4;
                         }
                         if(inventory.food === 0){
-                            playerArray[i].health -= 7;
+                            playerArray[i].health -= 10;
                         }
                         if(currentWeather === "cold" && inventory.clothing<10)
                         {
@@ -499,7 +523,7 @@ function continueTrail(){
                     if(playerArray[i].condition!=="none" && !justGotSick){
                         checkCure(playerArray[i], 1+pace);
                         if(playerArray[i].condition==="none"){
-                            console.log(playerArray[i].name + " is well again!");
+                            console.log(playerArray[i].name.green + " is well again!".green);
                         }
                     }
                     if(playerArray[i].health<=0&&playerArray[i].isAlive===true)
@@ -522,17 +546,17 @@ function continueTrail(){
 }
 
 function gameLost(){
-    console.log("\nEveryone in your party is dead. Game over!\n");
+    console.log("\nEveryone in your party has died.\nMany wagons fail to make it all the way to Oregon.".red);
     getScore("lost");
 }
 
 function playerDied(thePlayer){
     console.log("");
     if(thePlayer.condition!="none"){
-        console.log(thePlayer.name + " has died of "+ thePlayer.condition+"!");
+        console.log(thePlayer.name.red + " has died of ".red+ thePlayer.condition.red+"!".red);
     }
     else{
-        console.log(thePlayer.name + " got sick and died!");
+        console.log(thePlayer.name.red + " got sick and died!".red);
     }
     thePlayer.isAlive = false;
     console.log("");
@@ -542,7 +566,8 @@ function landmark(){
     if(nextLandmark.name == "The Willamette Valley, Oregon"){
         gameWon();
     }
-    console.log("You have arrived at " + nextLandmark.name);
+    console.log("You have arrived at ".green + nextLandmark.name.green);
+    console.log("\n"+nextLandmark.description.green+"\n");
     if(nextLandmark.type === "river"){
         riverCrossing();
     }
@@ -561,7 +586,7 @@ function landmark(){
 
 function oxenDied(){
     if(inventory.oxen>0){
-        console.log("An ox died.\n");
+        console.log("An ox died.\n".yellow);
         inventory.oxen--;
     }
     if(inventory.oxen<=0){
@@ -574,10 +599,10 @@ function oxenDied(){
 }
 
 function partBroke(){
-    console.log("Something on your wagon broke and must be repaired or replaced.\n");
+    console.log("Something on your wagon broke and must be repaired or replaced.\n".yellow);
     var partBroke = Math.floor(Math.random() * 3 +1);
     if(partBroke===1){
-        console.log("\nA wagon wheel broke! You must repair or replace it!\n");
+        console.log("\nA wagon wheel broke! You must repair or replace it!\n".yellow);
         var didRepair = Math.floor(Math.random() * 4 +1);
         if(didRepair===1||didRepair===repairModifier){
             console.log("\nYou were able to repair it!\n");
@@ -596,7 +621,7 @@ function partBroke(){
         }
     }
     else if(partBroke===2){
-        console.log("\nA wagon axel broke! You must repair or replace it!\n");
+        console.log("\nA wagon axel broke! You must repair or replace it!\n".yellow);
         var didRepair = Math.floor(Math.random() * 4 +1);
         if(didRepair===1||didRepair===repairModifier){
             console.log("\nYou were able to repair it!\n");
@@ -615,7 +640,7 @@ function partBroke(){
         }
     }
     else{
-        console.log("\nA wagon tongue broke! You must repair or replace it!\n");
+        console.log("\nA wagon tongue broke! You must repair or replace it!\n".yellow);
         var didRepair = Math.floor(Math.random() * 4 +1);
         if(didRepair===1||didRepair===repairModifier){
             console.log("\nYou were able to repair it!\n");
@@ -653,7 +678,7 @@ function fortArrival(){
 }
 
 function foreverStuck(){
-    console.log("\nYou cannot continue on the journey anymore! Game over!\n");
+    console.log("\nYou cannot continue on the journey anymore!\nMany wagons fail to make it all the way to Oregon.".red);
     getScore("stuck");
 }
 
@@ -742,29 +767,29 @@ function riverWaiting(){
 
 function disaster(disasterType){
     if(disasterType === "river"){
-        console.log("The river is too deep to ford. You lost:");
+        console.log("The river caused damage to your wagon! You lost:".red);
         for(var i = 0; i<5; i++){
-            if(playerArray[i].isAlive && (Math.floor(Math.random() * 15) == 0)){
-                console.log(playerArray[i].name + " (drowned)");
+            if(playerArray[i].isAlive && (Math.floor(Math.random() * 10) == 0)){
+                console.log(playerArray[i].name.red + " (drowned)".red);
                 playerArray[i].isAlive = false;
             }
         }
     }
     else if(disasterType === "fire"){
-        console.log("There was a fire! You lose:");
+        console.log("A fire in your wagon destroyed:".red);
         for(var i = 0; i<5; i++){
-            if(playerArray[i].isAlive && (Math.floor(Math.random() * 15) == 0)){
-                console.log(playerArray[i].name + " (burned)");
+            if(playerArray[i].isAlive && (Math.floor(Math.random() * 10) == 0)){
+                console.log(playerArray[i].name.red + " (burned)".red);
                 playerArray[i].isAlive = false;
             }
         }
     }
     else{
-        console.log("A thief broke into your wagon in the middle of night! You lost:");
+        console.log("A thief stole:".red);
     }
     for(var key in inventory){
         if(inventory[key]>0 && (Math.floor(Math.random() * 2) == 0)){
-            var numberLost = Math.floor(Math.random() * inventory[key] + 1);
+            var numberLost = parseInt((Math.floor(Math.random() * inventory[key] + 1))/2);
             if(numberLost>0){
                 inventory[key]=inventory[key]-numberLost;
                 console.log(numberLost+" "+key);
@@ -776,7 +801,7 @@ function disaster(disasterType){
 }
 
 function gameWon(){
-    console.log("\nYou made it to Oregon!\n");
+    console.log("\nYou made it to Oregon!\n".green);
     getScore("won");
 }
 
@@ -883,7 +908,7 @@ function rest(numberOfDays, whyRest){
             if(playerArray[j].condition!=="none"&&whyRest!=="problem"){
                 checkCure(playerArray[j], 1);
                 if(playerArray[j].condition==="none"){
-                    console.log(playerArray[j].name + " is well again!");
+                    console.log(playerArray[j].name.green + " is well again!".green);
                 }
             }
             if(rations === 1 && inventory.food > 0){
